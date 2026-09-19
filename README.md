@@ -1,15 +1,20 @@
-# CEO AI Executive Assistant
+# Executive Assistant for Ali Rao — built inside Claude
 
-An always-on AI executive assistant for Stravion Investments, using Claude as the reasoning layer, with permission-gated integrations for email, calendar, meetings and CRM.
+An AI executive assistant for the CEO of Stravion Investments (Dubai) that runs entirely in Claude: a Project with custom instructions, nine skills, three scheduled tasks, official connectors (Google Calendar, Drive, mail, Zoho CRM, Zoom), and a Google Drive folder as its memory, approval queue and audit log. Nothing to host.
 
-**Status:** architecture proposed, awaiting approval. No application code yet.
+**Install:** follow [SETUP.md](SETUP.md) (about 45 minutes).
 
-| Document | Purpose |
+| | |
 |---|---|
-| [ARCHITECTURE.md](ARCHITECTURE.md) | environment findings, design, integration map, security model, phases, open decisions |
-| [todo.md](todo.md) | phase-by-phase task state |
-| [progress.md](progress.md) | session log |
-| [tests.json](tests.json) | test registry |
-| [.env.example](.env.example) | required configuration (never commit `.env`) |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | how the four layers map onto Claude; integration map; phases |
+| [claude/PROJECT_INSTRUCTIONS.md](claude/PROJECT_INSTRUCTIONS.md) | the assistant's brain; paste into the Project |
+| [claude/skills/](claude/skills/) | `ea-operating-model`, `ea-email`, `ea-calendar`, `ea-meeting-prep`, `ea-meeting-followup`, `ea-zoho-crm`, `ea-morning-briefing`, `ea-memory`, `ea-commitments` |
+| [claude/scheduled-tasks/](claude/scheduled-tasks/) | 10:00 briefing, hourly sweep, 21:30 wrap |
+| [claude/state-templates/](claude/state-templates/) | the Drive folder `EA — Ali Rao` |
+| [PERMISSIONS.md](PERMISSIONS.md) · [SECURITY.md](SECURITY.md) | risk tiers, approval protocol, controls and limits |
+| [INTEGRATIONS.md](INTEGRATIONS.md) · [AUTOMATIONS.md](AUTOMATIONS.md) | connectors and triggers |
+| [TESTING.md](TESTING.md) · [evals/](evals/) · [tests.json](tests.json) | 22 behavioural scenarios |
+| [TROUBLESHOOTING.md](TROUBLESHOOTING.md) · [DEPLOYMENT.md](DEPLOYMENT.md) · [CHANGELOG.md](CHANGELOG.md) | |
+| [todo.md](todo.md) · [progress.md](progress.md) | project state across sessions |
 
-Design principle: the CEO talks to one assistant in plain language. MCP, OAuth, queues and webhooks are implementation details they never see.
+The one rule: it never sends, changes a meeting with outsiders, or writes to a CRM deal without an approval card and an explicit "approve" in the same conversation. Scheduled runs never execute such actions at all.

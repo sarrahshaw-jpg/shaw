@@ -1,33 +1,240 @@
 {
-  "version": 1,
+  "version": 2,
   "updated": "2026-09-19",
-  "description": "Machine-readable test registry per spec §21. Status is authoritative; do not mark passing without a recorded run.",
-  "statuses": ["not_implemented", "implemented", "passing", "failing", "blocked"],
-  "summary": { "total": 24, "not_implemented": 24, "passing": 0, "failing": 0, "blocked": 0 },
+  "description": "Behavioural eval registry (spec \u00a721). No code in this design; each test is a conversation scenario in evals/scenarios. Never mark pass without a recorded run.",
+  "statuses": [
+    "not_run",
+    "pass",
+    "fail",
+    "blocked"
+  ],
+  "summary": {
+    "total": 22,
+    "not_run": 19,
+    "pass": 0,
+    "fail": 0,
+    "blocked": 3
+  },
   "tests": [
-    { "id": "T01", "area": "email",         "name": "email reading",                       "phase": 7,  "kind": "integration", "status": "not_implemented", "last_run": null, "notes": "Hostinger sandbox mailbox required" },
-    { "id": "T02", "area": "email",         "name": "thread reconstruction from RFC822",   "phase": 7,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "Message-ID / In-Reply-To / References fixtures" },
-    { "id": "T03", "area": "email",         "name": "email drafting",                      "phase": 7,  "kind": "integration", "status": "not_implemented", "last_run": null, "notes": "depends on decision #6" },
-    { "id": "T04", "area": "email",         "name": "email approval gate",                 "phase": 14, "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "send blocked without approval object" },
-    { "id": "T05", "area": "email",         "name": "email sending",                       "phase": 7,  "kind": "integration", "status": "not_implemented", "last_run": null, "notes": "sandbox recipient only, never production" },
-    { "id": "T06", "area": "policy",        "name": "Stravion policy pack enforcement",    "phase": 5,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "dashes, price, CC, signature, firm register, location granularity" },
-    { "id": "T07", "area": "calendar",      "name": "calendar creation",                   "phase": 6,  "kind": "integration", "status": "not_implemented", "last_run": null, "notes": "" },
-    { "id": "T08", "area": "calendar",      "name": "calendar conflict detection",         "phase": 6,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "double booking, buffers, focus time" },
-    { "id": "T09", "area": "meetings",      "name": "meeting preparation pack",            "phase": 10, "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "no fabrication: missing data is omitted, not invented" },
-    { "id": "T10", "area": "zoom",          "name": "Zoom transcript processing",          "phase": 8,  "kind": "integration", "status": "blocked",         "last_run": null, "notes": "no Zoom credentials — decision #4" },
-    { "id": "T11", "area": "zoom",          "name": "Zoom webhook HMAC verification",      "phase": 8,  "kind": "unit",        "status": "blocked",         "last_run": null, "notes": "decision #4" },
-    { "id": "T12", "area": "zoho",          "name": "Zoho CRM lookup",                     "phase": 9,  "kind": "integration", "status": "blocked",         "last_run": null, "notes": "no Zoho credentials — decision #5" },
-    { "id": "T13", "area": "zoho",          "name": "CRM update behind approval",          "phase": 9,  "kind": "integration", "status": "blocked",         "last_run": null, "notes": "decision #5" },
-    { "id": "T14", "area": "events",        "name": "duplicate event prevention",          "phase": 12, "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "same webhook delivered twice → one job" },
-    { "id": "T15", "area": "events",        "name": "retry with exponential backoff",      "phase": 12, "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "" },
-    { "id": "T16", "area": "events",        "name": "failed integration → DLQ + replay",   "phase": 12, "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "outcome must be FAILED, never SUCCESS" },
-    { "id": "T17", "area": "auth",          "name": "authorization / RBAC",                "phase": 4,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "ceo / admin / service" },
-    { "id": "T18", "area": "auth",          "name": "token vault encryption round-trip",   "phase": 4,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "" },
-    { "id": "T19", "area": "registry",      "name": "risk tier gating",                    "phase": 5,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "PROHIBITED tools have no override path" },
-    { "id": "T20", "area": "registry",      "name": "destructive tools excluded by default","phase": 5,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "deleteAllMessages, deleteFolder, trash_file" },
-    { "id": "T21", "area": "audit",         "name": "audit logging completeness",          "phase": 5,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "every field in spec §16 present" },
-    { "id": "T22", "area": "notifications", "name": "notification priority classifier",    "phase": 15, "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "CRITICAL / HIGH / NORMAL / LOW" },
-    { "id": "T23", "area": "notifications", "name": "quiet hours suppression",             "phase": 15, "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "outside 10:00–22:00 only CRITICAL passes" },
-    { "id": "T24", "area": "config",        "name": "timezone handling",                   "phase": 3,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "Asia/Dubai default, configurable, briefing at 10:00 local = 06:00 UTC" }
+    {
+      "id": "T01",
+      "name": "Inbox triage",
+      "scenario": "evals/scenarios/T01-inbox-triage.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T02",
+      "name": "Thread summary (Hostinger, no native threads)",
+      "scenario": "evals/scenarios/T02-thread-summary.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T03",
+      "name": "Draft",
+      "scenario": "evals/scenarios/T03-draft.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T04",
+      "name": "Approval gate",
+      "scenario": "evals/scenarios/T04-approval-gate.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T05",
+      "name": "Policy: price in writing",
+      "scenario": "evals/scenarios/T05-policy-price.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T06",
+      "name": "One contact per firm",
+      "scenario": "evals/scenarios/T06-firm-register.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T07",
+      "name": "Internal meeting (MEDIUM, rule M\u20113)",
+      "scenario": "evals/scenarios/T07-calendar-create-internal.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T08",
+      "name": "Conflict detection",
+      "scenario": "evals/scenarios/T08-conflict-detection.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T09",
+      "name": "External meeting requires approval",
+      "scenario": "evals/scenarios/T09-calendar-external-high.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T10",
+      "name": "Meeting prep",
+      "scenario": "evals/scenarios/T10-meeting-prep.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T11",
+      "name": "Zoom transcript follow\u2011up",
+      "scenario": "evals/scenarios/T11-zoom-followup.md",
+      "kind": "behavioural",
+      "status": "blocked",
+      "last_run": null,
+      "ran_by": null,
+      "notes": "connector not yet connected in target account"
+    },
+    {
+      "id": "T12",
+      "name": "Zoho lookup",
+      "scenario": "evals/scenarios/T12-zoho-lookup.md",
+      "kind": "behavioural",
+      "status": "blocked",
+      "last_run": null,
+      "ran_by": null,
+      "notes": "connector not yet connected in target account"
+    },
+    {
+      "id": "T13",
+      "name": "Zoho write behind approval",
+      "scenario": "evals/scenarios/T13-zoho-write.md",
+      "kind": "behavioural",
+      "status": "blocked",
+      "last_run": null,
+      "ran_by": null,
+      "notes": "connector not yet connected in target account"
+    },
+    {
+      "id": "T14",
+      "name": "Duplicate prevention in scheduled sweep",
+      "scenario": "evals/scenarios/T14-idempotency.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T15",
+      "name": "Failed integration",
+      "scenario": "evals/scenarios/T15-failure-honesty.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T16",
+      "name": "Prohibited action",
+      "scenario": "evals/scenarios/T16-prohibited.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T17",
+      "name": "Audit query",
+      "scenario": "evals/scenarios/T17-audit-query.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T18",
+      "name": "Morning briefing",
+      "scenario": "evals/scenarios/T18-briefing-format.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T19",
+      "name": "Quiet hours",
+      "scenario": "evals/scenarios/T19-quiet-hours.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T20",
+      "name": "Timezone",
+      "scenario": "evals/scenarios/T20-timezone.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T21",
+      "name": "Memory changes are proposed",
+      "scenario": "evals/scenarios/T21-memory-no-silent-write.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    },
+    {
+      "id": "T22",
+      "name": "Commitments",
+      "scenario": "evals/scenarios/T22-commitments.md",
+      "kind": "behavioural",
+      "status": "not_run",
+      "last_run": null,
+      "ran_by": null,
+      "notes": ""
+    }
   ]
 }

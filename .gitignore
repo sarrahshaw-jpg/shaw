@@ -1,19 +1,5 @@
-# secrets — never commit
+dist/
+.DS_Store
+# no secrets exist in this design; never add any
 .env
 .env.*
-!.env.example
-*.pem
-*.key
-credentials*.json
-token*.json
-
-# dependencies / build
-node_modules/
-dist/
-coverage/
-*.tsbuildinfo
-
-# runtime
-*.log
-.DS_Store
-tmp/

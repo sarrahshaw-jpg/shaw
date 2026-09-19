@@ -4,6 +4,18 @@ Append-only. Newest entry at the top. Keeps project state across Claude Code ses
 
 ---
 
+## 2026-09-19 — Session 1, part 2 — Claude‑native redesign (v2)
+
+**Direction from you:** everything inside Claude, no separate tool; principal is Ali Rao; shareable with him (Team/Enterprise); Zoom sometimes; Zoho all modules, UAE; email per my recommendation.
+
+**Verified**
+- claude.ai directory has official connectors for Zoom ("Zoom for Claude": search, recordings, meeting assets), Zoho CRM (41 tools), Gmail, Slack. Zoho docs list no UAE‑specific data centre; the connector routes by account so it does not matter.
+- MX lookup for alirao.com blocked by egress policy; Ali's mail host unconfirmed. Package supports Gmail / Hostinger / M365.
+
+**Built:** `claude/PROJECT_INSTRUCTIONS.md`; skills ea-operating-model, ea-email, ea-calendar, ea-meeting-prep, ea-meeting-followup, ea-zoho-crm, ea-morning-briefing, ea-memory, ea-commitments; three scheduled‑task prompts with UTC crons; Drive state templates; full doc set; 22 eval scenarios; zip script. v1 backend design moved to `docs/ARCHITECTURE-v1-backend.md` as Appendix B.
+
+**Not done:** installation in Ali's account (needs his connectors); evals not run (no target account yet); push blocked by GitHub App access (403).
+
 ## 2026-09-19 — Session 1 — Phases 0 and 1
 
 **Done**

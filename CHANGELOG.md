@@ -1,0 +1,10 @@
+# CHANGELOG
+
+## 0.2.0 — 2026-09-19
+- Redesigned as Claude‑native: Project instructions + 9 skills + 3 scheduled tasks + Drive state folder. No backend.
+- Principal set to Ali Rao; Sarah Shaw as delegate.
+- Verified official connectors exist for Zoom, Zoho CRM, Gmail, Slack.
+- Added SETUP, SECURITY, PERMISSIONS, INTEGRATIONS, AUTOMATIONS, TESTING, TROUBLESHOOTING, DEPLOYMENT, 22 eval scenarios.
+
+## 0.1.0 — 2026-09-19
+- Phase 0 inspection and custom‑backend architecture proposal (now Appendix B).
