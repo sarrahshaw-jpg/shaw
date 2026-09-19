@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "updated": "2026-09-19",
+  "description": "Machine-readable test registry per spec §21. Status is authoritative; do not mark passing without a recorded run.",
+  "statuses": ["not_implemented", "implemented", "passing", "failing", "blocked"],
+  "summary": { "total": 24, "not_implemented": 24, "passing": 0, "failing": 0, "blocked": 0 },
+  "tests": [
+    { "id": "T01", "area": "email",         "name": "email reading",                       "phase": 7,  "kind": "integration", "status": "not_implemented", "last_run": null, "notes": "Hostinger sandbox mailbox required" },
+    { "id": "T02", "area": "email",         "name": "thread reconstruction from RFC822",   "phase": 7,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "Message-ID / In-Reply-To / References fixtures" },
+    { "id": "T03", "area": "email",         "name": "email drafting",                      "phase": 7,  "kind": "integration", "status": "not_implemented", "last_run": null, "notes": "depends on decision #6" },
+    { "id": "T04", "area": "email",         "name": "email approval gate",                 "phase": 14, "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "send blocked without approval object" },
+    { "id": "T05", "area": "email",         "name": "email sending",                       "phase": 7,  "kind": "integration", "status": "not_implemented", "last_run": null, "notes": "sandbox recipient only, never production" },
+    { "id": "T06", "area": "policy",        "name": "Stravion policy pack enforcement",    "phase": 5,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "dashes, price, CC, signature, firm register, location granularity" },
+    { "id": "T07", "area": "calendar",      "name": "calendar creation",                   "phase": 6,  "kind": "integration", "status": "not_implemented", "last_run": null, "notes": "" },
+    { "id": "T08", "area": "calendar",      "name": "calendar conflict detection",         "phase": 6,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "double booking, buffers, focus time" },
+    { "id": "T09", "area": "meetings",      "name": "meeting preparation pack",            "phase": 10, "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "no fabrication: missing data is omitted, not invented" },
+    { "id": "T10", "area": "zoom",          "name": "Zoom transcript processing",          "phase": 8,  "kind": "integration", "status": "blocked",         "last_run": null, "notes": "no Zoom credentials — decision #4" },
+    { "id": "T11", "area": "zoom",          "name": "Zoom webhook HMAC verification",      "phase": 8,  "kind": "unit",        "status": "blocked",         "last_run": null, "notes": "decision #4" },
+    { "id": "T12", "area": "zoho",          "name": "Zoho CRM lookup",                     "phase": 9,  "kind": "integration", "status": "blocked",         "last_run": null, "notes": "no Zoho credentials — decision #5" },
+    { "id": "T13", "area": "zoho",          "name": "CRM update behind approval",          "phase": 9,  "kind": "integration", "status": "blocked",         "last_run": null, "notes": "decision #5" },
+    { "id": "T14", "area": "events",        "name": "duplicate event prevention",          "phase": 12, "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "same webhook delivered twice → one job" },
+    { "id": "T15", "area": "events",        "name": "retry with exponential backoff",      "phase": 12, "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "" },
+    { "id": "T16", "area": "events",        "name": "failed integration → DLQ + replay",   "phase": 12, "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "outcome must be FAILED, never SUCCESS" },
+    { "id": "T17", "area": "auth",          "name": "authorization / RBAC",                "phase": 4,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "ceo / admin / service" },
+    { "id": "T18", "area": "auth",          "name": "token vault encryption round-trip",   "phase": 4,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "" },
+    { "id": "T19", "area": "registry",      "name": "risk tier gating",                    "phase": 5,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "PROHIBITED tools have no override path" },
+    { "id": "T20", "area": "registry",      "name": "destructive tools excluded by default","phase": 5,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "deleteAllMessages, deleteFolder, trash_file" },
+    { "id": "T21", "area": "audit",         "name": "audit logging completeness",          "phase": 5,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "every field in spec §16 present" },
+    { "id": "T22", "area": "notifications", "name": "notification priority classifier",    "phase": 15, "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "CRITICAL / HIGH / NORMAL / LOW" },
+    { "id": "T23", "area": "notifications", "name": "quiet hours suppression",             "phase": 15, "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "outside 10:00–22:00 only CRITICAL passes" },
+    { "id": "T24", "area": "config",        "name": "timezone handling",                   "phase": 3,  "kind": "unit",        "status": "not_implemented", "last_run": null, "notes": "Asia/Dubai default, configurable, briefing at 10:00 local = 06:00 UTC" }
+  ]
+}
