@@ -12,3 +12,10 @@
 | Quiet hours | tasks simply do not run outside 06–18 UTC; task 02 also checks `00-config.md` | | |
 
 Event dedupe: `07-processed.md`. Retry: once per connector call, then report. Replay: an unprocessed item is picked up by the next run automatically because it is not in `07-processed.md`.
+
+## Runner options (verified 2026‑09‑19)
+Two equivalent ways to host the three background runs, both fresh‑session, both with connectors and push notifications:
+1. **claude.ai scheduled tasks** in Ali's account (LAUNCH.md Part 1 step 4).
+2. **Claude Code Routines** (`create_trigger`, hourly minimum). Three Routines already run daily in this account for the LinkedIn project, so the mechanism is proven here. A failed run is visible in run history; add an admin alert on two consecutive failures.
+
+Sub‑hour reaction (webhook‑driven) needs Track 2 `ea-core`; see ARCHITECTURE.md §C.

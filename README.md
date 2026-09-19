@@ -6,7 +6,7 @@ An AI executive assistant for the CEO of Stravion Investments (Dubai) that runs 
 
 | | |
 |---|---|
-| [ARCHITECTURE.md](ARCHITECTURE.md) | how the four layers map onto Claude; integration map; phases |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | v3: spec‑vs‑v2 gap table, Track 1 (Claude‑native, built) + Track 2 (`ea-core`, proposed), stack, integration map, phases, what is needed. **Awaiting approval.** |
 | [claude/PROJECT_INSTRUCTIONS.md](claude/PROJECT_INSTRUCTIONS.md) | the assistant's brain; paste into the Project |
 | [claude/skills/](claude/skills/) | `ea-operating-model`, `ea-email`, `ea-calendar`, `ea-meeting-prep`, `ea-meeting-followup`, `ea-zoho-crm`, `ea-morning-briefing`, `ea-memory`, `ea-commitments` |
 | [claude/scheduled-tasks/](claude/scheduled-tasks/) | 10:00 briefing, hourly sweep, 21:30 wrap |

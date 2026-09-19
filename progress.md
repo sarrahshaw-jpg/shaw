@@ -4,6 +4,26 @@ Append-only. Newest entry at the top. Keeps project state across Claude Code ses
 
 ---
 
+## 2026-09-19 — Session 2 — Master spec re‑issued; architecture v3
+
+**Input:** the full master build specification, re‑sent, asking for Phase 0–1 and a stop for approval.
+
+**Verified by direct call**
+- Host unchanged (Ubuntu 24.04, Node 22.22, Python 3.11.15, Docker 29.3, Postgres 16 / Redis 7 clients). No public inbound URL.
+- Google Calendar (`aamirsawar123@gmail.com`, Asia/Dubai), Google Drive, Hostinger Mail (`sarah@stravion.ae`, 300 req/window), Zapier (LinkedIn only), Apify, Vibe Prospecting, Indeed: connected. Zoom, Zoho CRM, Gmail, M365, Slack: not connected.
+- Drive has **no** `EA — Ali Rao` folder; Track 1 was never installed.
+- **New:** this account runs three Claude Code Routines daily (LinkedIn prep ×2, DMC reply watch) with Drive/Hostinger/Calendar/Zapier connectors, push notifications, run history; one run failed on 18 Sep. Proven Layer C at hourly granularity.
+
+**Done**
+- ARCHITECTURE.md v3: gap table spec vs v2; two‑track design; stack (TypeScript for Track 2, reasons); integration map; security model; phases per track; repo structure; needs list.
+- todo.md, tests.json (v3, C01–C10 planned), CHANGELOG 0.4.0, README, AUTOMATIONS updated.
+
+**Decisions taken:** none that are architectural. Recommendation only: Track 1 now, Track 2 after evals, TypeScript.
+
+**Not done, deliberately:** no application code (spec §26).
+
+**Blocked on:** ARCHITECTURE.md §H items 1–7.
+
 ## 2026-09-19 — Session 1, part 3 — launch path and phone efficiency
 
 Added LAUNCH.md (admin on computer, Ali connects tools, then phone app). Made the agent phone‑first: under 8 lines, one item per line, `1 approve · 2 edit · 3 drop` cards, dictation tolerance. Efficiency: single `00-config.md` read with a hot cache refreshed nightly, parallel lookups, no re‑reads, one‑call answers for the common questions. Pushed after GitHub access was granted.

@@ -1,19 +1,21 @@
 {
-  "version": 2,
+  "version": 3,
   "updated": "2026-09-19",
-  "description": "Behavioural eval registry (spec \u00a721). No code in this design; each test is a conversation scenario in evals/scenarios. Never mark pass without a recorded run.",
+  "description": "Test registry (spec §21). T01–T22 are behavioural eval scenarios for Track 1 (Claude‑native), run by hand against real or sandbox accounts. C01–C10 are planned automated tests for Track 2 (ea-core); they exist only as placeholders until Track 2 is approved. Never mark pass without a recorded run.",
   "statuses": [
     "not_run",
     "pass",
     "fail",
-    "blocked"
+    "blocked",
+    "planned"
   ],
   "summary": {
-    "total": 22,
     "not_run": 19,
     "pass": 0,
     "fail": 0,
-    "blocked": 3
+    "blocked": 3,
+    "planned": 10,
+    "total": 32
   },
   "tests": [
     {
@@ -24,7 +26,8 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T02",
@@ -34,7 +37,8 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T03",
@@ -44,7 +48,8 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T04",
@@ -54,7 +59,8 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T05",
@@ -64,7 +70,8 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T06",
@@ -74,17 +81,19 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T07",
-      "name": "Internal meeting (MEDIUM, rule M\u20113)",
+      "name": "Internal meeting (MEDIUM, rule M‑3)",
       "scenario": "evals/scenarios/T07-calendar-create-internal.md",
       "kind": "behavioural",
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T08",
@@ -94,7 +103,8 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T09",
@@ -104,7 +114,8 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T10",
@@ -114,17 +125,19 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T11",
-      "name": "Zoom transcript follow\u2011up",
+      "name": "Zoom transcript follow‑up",
       "scenario": "evals/scenarios/T11-zoom-followup.md",
       "kind": "behavioural",
       "status": "blocked",
       "last_run": null,
       "ran_by": null,
-      "notes": "connector not yet connected in target account"
+      "notes": "connector not yet connected in target account",
+      "track": 1
     },
     {
       "id": "T12",
@@ -134,7 +147,8 @@
       "status": "blocked",
       "last_run": null,
       "ran_by": null,
-      "notes": "connector not yet connected in target account"
+      "notes": "connector not yet connected in target account",
+      "track": 1
     },
     {
       "id": "T13",
@@ -144,7 +158,8 @@
       "status": "blocked",
       "last_run": null,
       "ran_by": null,
-      "notes": "connector not yet connected in target account"
+      "notes": "connector not yet connected in target account",
+      "track": 1
     },
     {
       "id": "T14",
@@ -154,7 +169,8 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T15",
@@ -164,7 +180,8 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T16",
@@ -174,7 +191,8 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T17",
@@ -184,7 +202,8 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T18",
@@ -194,7 +213,8 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T19",
@@ -204,7 +224,8 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T20",
@@ -214,7 +235,8 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T21",
@@ -224,7 +246,8 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
     },
     {
       "id": "T22",
@@ -234,7 +257,118 @@
       "status": "not_run",
       "last_run": null,
       "ran_by": null,
-      "notes": ""
+      "notes": "",
+      "track": 1
+    },
+    {
+      "id": "C01",
+      "name": "Config: timezone and operating hours (Asia/Dubai default, configurable)",
+      "scenario": null,
+      "kind": "unit",
+      "track": 2,
+      "status": "planned",
+      "last_run": null,
+      "ran_by": null,
+      "notes": "Track 2 not approved"
+    },
+    {
+      "id": "C02",
+      "name": "Tool registry: schema, risk tier, approval flag, allowlist exclusion of destructive tools",
+      "scenario": null,
+      "kind": "unit",
+      "track": 2,
+      "status": "planned",
+      "last_run": null,
+      "ran_by": null,
+      "notes": "Track 2 not approved"
+    },
+    {
+      "id": "C03",
+      "name": "Policy pack: dashes, price in writing, one contact per firm, CC rule, disclosure limits",
+      "scenario": null,
+      "kind": "unit",
+      "track": 2,
+      "status": "planned",
+      "last_run": null,
+      "ran_by": null,
+      "notes": "Track 2 not approved"
+    },
+    {
+      "id": "C04",
+      "name": "Approval gate: HIGH action blocked without approval object; PROHIBITED has no override",
+      "scenario": null,
+      "kind": "unit",
+      "track": 2,
+      "status": "planned",
+      "last_run": null,
+      "ran_by": null,
+      "notes": "Track 2 not approved"
+    },
+    {
+      "id": "C05",
+      "name": "Audit log: every guarded call writes an append‑only row",
+      "scenario": null,
+      "kind": "unit",
+      "track": 2,
+      "status": "planned",
+      "last_run": null,
+      "ran_by": null,
+      "notes": "Track 2 not approved"
+    },
+    {
+      "id": "C06",
+      "name": "Webhook ingress: HMAC verify, timestamp window, replay rejection",
+      "scenario": null,
+      "kind": "integration",
+      "track": 2,
+      "status": "planned",
+      "last_run": null,
+      "ran_by": null,
+      "notes": "Track 2 not approved"
+    },
+    {
+      "id": "C07",
+      "name": "Event idempotency: duplicate delivery processed once",
+      "scenario": null,
+      "kind": "integration",
+      "track": 2,
+      "status": "planned",
+      "last_run": null,
+      "ran_by": null,
+      "notes": "Track 2 not approved"
+    },
+    {
+      "id": "C08",
+      "name": "Retry with exponential backoff, DLQ after N failures, replay from DLQ",
+      "scenario": null,
+      "kind": "integration",
+      "track": 2,
+      "status": "planned",
+      "last_run": null,
+      "ran_by": null,
+      "notes": "Track 2 not approved"
+    },
+    {
+      "id": "C09",
+      "name": "Calendar conflict detection against sandbox calendar",
+      "scenario": null,
+      "kind": "integration",
+      "track": 2,
+      "status": "planned",
+      "last_run": null,
+      "ran_by": null,
+      "notes": "Track 2 not approved"
+    },
+    {
+      "id": "C10",
+      "name": "Failed integration surfaces FAILED / PARTIAL SUCCESS, never SUCCESS",
+      "scenario": null,
+      "kind": "integration",
+      "track": 2,
+      "status": "planned",
+      "last_run": null,
+      "ran_by": null,
+      "notes": "Track 2 not approved"
     }
   ]
 }
