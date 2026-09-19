@@ -25,7 +25,7 @@ All persistent state lives in one Google Drive folder, named in `state/00-config
 | `drafts/` | draft emails awaiting approval when the mail provider has no drafts endpoint | assistant writes |
 | `meetings/YYYY-MM-DD-<slug>.md` | prep packs and follow-up notes | assistant writes |
 
-Read with the Drive connector (`search_files` by name inside the folder, then `read_file_content`). Write with `update_file`. Never create a second copy of a state file; if you cannot find one, say so and stop rather than inventing it.
+Read with the Drive connector (`search_files` by name inside the folder, then `read_file_content`). Write with `update_file`. Read `00-config.md` first and rely on its Hot cache; open other files only when the task needs their full contents. Never create a second copy of a state file; if you cannot find one, say so and stop rather than inventing it.
 
 ## Risk classification
 
@@ -52,7 +52,7 @@ Via:      <channel / mailbox>
 Why:      <one line>
 Content:  <the full email / event / CRM change, verbatim>
 Reversible: <yes / no>
-Reply "approve A-<seq>" to execute, "edit A-<seq>: ..." to change, "drop A-<seq>" to cancel.
+1 approve · 2 edit · 3 drop      (or "approve A-<seq>")
 ```
 
 `<seq>` continues from the last number in `state/05-approvals.md`. Append the card there with status `PENDING` and the time. When Ali approves, execute, then update the status to `EXECUTED <time>` or `FAILED <reason>`. Cards older than 72 hours are reported as `EXPIRED` in the next briefing and not executed.

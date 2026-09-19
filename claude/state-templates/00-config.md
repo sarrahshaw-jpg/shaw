@@ -22,3 +22,20 @@ Only Ali or the admin edits this file. The assistant reads it at the start of ev
 | approval_expiry_hours | 72 |
 | critical_vip_wait_hours | 24 |
 | unanswered_high_hours | 48 |
+
+## Hot cache
+
+Refreshed by the 21:30 evening wrap from the other state files so that most tasks need only this one read. Do not edit by hand; edit the source file.
+
+| Key | Value |
+|---|---|
+| vip_domains | stravion.ae (add domains from 02-vip-contacts.md) |
+| vip_names | Sarah Shaw |
+| firm_register_count | 0 |
+| last_approval_seq | A-000 |
+| open_approvals | none |
+| overdue_commitments | 0 |
+| meeting_default_min | 30 |
+| buffer_min | 15 |
+| outbound_rules | no dashes; end at "Warm regards,"; no price/yield/ratio; no shareholding; one contact per firm |
+| cache_refreshed | never |

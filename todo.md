@@ -9,6 +9,7 @@
 - [x] SETUP, SECURITY, PERMISSIONS, INTEGRATIONS, AUTOMATIONS, TESTING, TROUBLESHOOTING, DEPLOYMENT, CHANGELOG
 - [x] 22 eval scenarios + tests.json registry
 - [x] scripts/make-skill-zips.sh
+- [x] LAUNCH.md, phone‑first and efficiency rules, hot cache
 
 ## To install (SETUP.md), needs you or Ali
 - [!] Decide plan: Team (recommended) / Enterprise / Ali's own account

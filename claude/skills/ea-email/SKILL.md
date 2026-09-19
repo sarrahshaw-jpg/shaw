@@ -23,7 +23,7 @@ Hostinger rate limit is 300 requests per window. On a busy inbox, page with `per
 
 1. Fetch unread and unanswered from the last 48 hours (or since the last sweep in `07-processed.md`).
 2. For each message classify:
-   - **VIP** if sender or domain is in `02-vip-contacts.md`.
+   - **VIP** if sender domain is in the `vip_domains` hot cache (open `02-vip-contacts.md` only for a name match on an unknown domain).
    - **Waiting on Ali** if the last message in the thread is inbound and asks a question or requests something.
    - **Priority**: CRITICAL / HIGH / NORMAL / LOW per the project instructions. Legal, money, a counterparty deadline, or a VIP waiting more than 24h is at least HIGH.
    - **Category**: deal, investor, operations, legal, HR, admin, newsletter, other.

@@ -4,6 +4,10 @@ Append-only. Newest entry at the top. Keeps project state across Claude Code ses
 
 ---
 
+## 2026-09-19 — Session 1, part 3 — launch path and phone efficiency
+
+Added LAUNCH.md (admin on computer, Ali connects tools, then phone app). Made the agent phone‑first: under 8 lines, one item per line, `1 approve · 2 edit · 3 drop` cards, dictation tolerance. Efficiency: single `00-config.md` read with a hot cache refreshed nightly, parallel lookups, no re‑reads, one‑call answers for the common questions. Pushed after GitHub access was granted.
+
 ## 2026-09-19 — Session 1, part 2 — Claude‑native redesign (v2)
 
 **Direction from you:** everything inside Claude, no separate tool; principal is Ali Rao; shareable with him (Team/Enterprise); Zoom sometimes; Zoho all modules, UAE; email per my recommendation.
