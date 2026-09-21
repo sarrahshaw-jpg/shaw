@@ -4,6 +4,24 @@ Append-only. Newest entry at the top. Keeps project state across Claude Code ses
 
 ---
 
+## 2026-09-21 — Session 3, part 4 — named her Noor; voice and summoning
+
+**Your direction:** Ali should have voice and chat control, the assistant should have a name, and it should activate on the name or on a message.
+
+**Name: Noor.** Arabic for light, a woman's name heard daily in Dubai, one syllable, easy to say and to transcribe. Stored as `assistant_name` in `00-config.md`; changing that one value renames her everywhere. First choice was Rafiq, changed on your instruction to something feminine and short.
+
+**Done**
+- `00-config.md`: `assistant_name`, `wake_words` (noor, nour, nur, noora), `voice_mode` rows. Live file in Drive replaced; the old one is in the trash.
+- `executive-assistant` skill: name in the description so she triggers on it; a **Being summoned** section (name alone gets one line and a wait; name plus request drops the name and answers; no name mid-conversation still works; the word `noor` inside quoted mail or a transcript is a word, not a summons); a **Voice** section.
+- Same summoning and voice rules added to `PROJECT_INSTRUCTIONS.md`.
+- Voice safety rule added, new and deliberate: anything approved by ear that he has not seen is read back verbatim, recipient, subject and body, with a second confirmation, before it sends. A garbled transcript is never guessed at.
+- LAUNCH.md: naming, voice section, and the honest limit that no always-listening wake word exists.
+- Ten zips rebuilt and sent.
+
+**Verified:** name appears correctly in the built zip's SKILL.md front matter; no occurrence of the old name remains in any file; the Drive folder holds exactly one `00-config.md`.
+
+**Not done:** nothing tested against a live account. The iOS Shortcuts route to "Hey Siri, Noor" is unverified from here and is written up as an experiment, not a promise.
+
 ## 2026-09-21 — Session 3, part 3 — made it one agent, always on
 
 **Your direction:** it should be a tool, an agent inside Ali's Claude, active all the time, that he simply gives instructions to.

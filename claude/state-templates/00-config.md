@@ -4,6 +4,8 @@ Only Ali or the admin edits this file. The assistant reads it at the start of ev
 
 | Key | Value |
 |---|---|
+| assistant_name | Noor (change this one value to rename her everywhere; the skills read it from here) |
+| wake_words | noor, nour, nur, noora (spoken and typed; transcription variants included on purpose) |
 | principal | Ali Rao <ar@alirao.com> |
 | delegate | Sarah Shaw <sarah@stravion.ae> (may approve MEDIUM actions; may not approve HIGH on Ali's behalf) |
 | timezone | Asia/Dubai |
@@ -20,6 +22,7 @@ Only Ali or the admin edits this file. The assistant reads it at the start of ev
 | meetings | Zoom (cloud recordings with recap enabled by host), Google Meet |
 | chat | none yet (Slack optional) |
 | draft_flow | hostinger_drafts: a draft is written and kept; if Ali says "read it to me" it is read back verbatim; if he says "send it" it goes out after the approval card; otherwise it stays as a draft for him to send with one tap (decided 2026-09-21) |
+| voice_mode | on: spoken answers are shorter and speakable, drafts are always read back before a spoken send, approvals require the words "send it" or "approve" |
 | approval_expiry_hours | 72 |
 | critical_vip_wait_hours | 24 |
 | unanswered_high_hours | 48 |

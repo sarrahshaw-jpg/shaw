@@ -1,4 +1,6 @@
-# LAUNCH — putting the assistant into Ali's Claude
+# LAUNCH — putting Noor into Ali's Claude
+
+**Noor** is the assistant's name. Arabic for light, and a woman's name heard every day in Dubai. One syllable, soft, impossible to mistype, and it survives a bad voice transcript. To rename it, change one value, `assistant_name` in `00-config.md`, and it is called that everywhere from the next conversation. Nothing else needs editing.
 
 The goal, stated plainly: **one agent living inside Ali's own Claude**, on his phone and laptop, awake on its own schedule, that he talks to in ordinary words. No app to install beyond Claude itself, nothing to host, no syntax to learn.
 
@@ -65,13 +67,23 @@ What he will actually notice: a briefing at 10:00, a notification during the day
 
 ## Part 4 — Ali, on the phone, every day
 
-Install the Claude app, sign in, allow notifications. Then talk to it:
+Install the Claude app, sign in, allow notifications. Then talk to it, by thumb or by voice:
 
-- "What do I have today?" · "What's important in my inbox?" · "Prepare me for my next meeting"
+- "Noor, what do I have today?" · "What's important in my inbox?" · "Prepare me for my next meeting"
 - "Draft a reply to Khalid saying Thursday works" → "Read it to me" → "Send it" → a card appears → reply **1** and it goes
 - "What did we agree with ABC last time?" · "Which clients need me?" · "Update Zoho with the outcome" · "What did you do today?"
 
-No commands, no menus. If he does not say send, a draft simply waits for him.
+Saying just "Noor" gets a one word answer and a wait. He does not have to repeat the name once a conversation is running. No commands, no menus. If he does not say send, a draft simply waits for him.
+
+### Voice, and where the line honestly falls
+
+**What works.** Open the Claude app, use voice mode, and speak. Noor answers in speech shaped for listening: three or four sentences, no tables or bullets read aloud, times said in full, one question at a time. Dictated text in the normal chat box works the same way. He can run a whole exchange without looking at the screen: ask what is in the inbox, ask for a reply to be drafted, have it read back, say send it.
+
+**The safety rule in voice.** Before anything he approved by ear actually goes out, Noor reads the recipient, the subject and the body back word for word and asks once more. He cannot see a card he never looked at, so hearing it is the only way he knows what he approved. If the transcript is garbled, Noor says it did not catch that and asks rather than guessing at a name or a figure.
+
+**What does not exist, so nobody is disappointed.** There is no always listening hotword. Ali cannot say "Noor" to a locked phone on a table and have it wake up, the way Siri does. That is an operating system capability, and Claude does not offer a custom wake word. He opens the app, or the existing conversation, and then speaks. The name is what activates the assistant *inside* Claude, not what wakes the phone.
+
+**One thing worth trying on iPhone.** Open the Shortcuts app and search for a Claude action. If one is offered, make a shortcut named "Noor" that opens Claude, and "Hey Siri, Noor" will then hand him straight into the app with the mic live. That is Apple's wake word doing the waking and Claude doing the work, which is as close to Siri behaviour as this can get. I have not been able to verify from here whether that action is exposed, so treat it as a two minute experiment rather than a promise.
 
 **The standing promise:** nothing is sent, no meeting with an outsider is changed, and nothing is written to a CRM deal without a card and his explicit yes. The scheduled runs cannot do any of those things at all, by design.
 

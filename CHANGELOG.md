@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.7.0 — 2026-09-21
+- Named the assistant **Noor**, configurable via `assistant_name`. Added `wake_words` and `voice_mode` config rows.
+- Summoning rules: activates on her name alone, on name plus request, or on a plain request mid-conversation. The name inside quoted content is data, not a summons.
+- Voice mode rules, including a mandatory verbatim read-back and second confirmation before sending anything approved by ear but not seen.
+
 ## 0.6.0 — 2026-09-21
 - Added the `executive-assistant` entry skill so the assistant triggers on plain language anywhere in Ali's Claude, not only inside a Project. Ten skill zips now build.
 - LAUNCH.md rewritten as the one-agent, always-on install path, with the three real limits stated.
