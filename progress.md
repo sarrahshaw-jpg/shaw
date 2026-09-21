@@ -4,6 +4,24 @@ Append-only. Newest entry at the top. Keeps project state across Claude Code ses
 
 ---
 
+## 2026-09-21 — Session 3, part 2 — decisions recorded, Drive state folder created
+
+**Your decisions:** Ali connects his own Google Calendar; his mail is Hostinger; drafts stay as drafts, are read aloud when he asks, go out when he says "send it", and otherwise wait for him to send with one tap.
+
+**Done**
+- Recorded in `00-config.md` (`mail_provider`, `calendar`, new `draft_flow` row), the `ea-email` skill (a Draft flow section with the three exits), `SETUP.md` and `ARCHITECTURE.md` §G decision log.
+- Created the Drive state folder **`EA — Ali Rao`** (id `10QygQqVM3FkQ7M0jhVwO9EHkQevcXI-A`) in the admin Drive: README, 00-config, 01-preferences, 02-vip-contacts, 03-firm-register, 04-commitments, 05-approvals, 06-automation-rules, 07-processed, and subfolders `audit/` (with `2026-09.md`), `drafts/`, `meetings/`, `briefings/`. Verified by listing the folder.
+
+**Verified, not assumed:** all 13 items listed back from Drive after upload.
+
+**Honest limit found:** the Hostinger API has no draft endpoint, so a draft cannot be placed in Ali's mail-app Drafts folder. "One tap" means tapping 1 on the card in Claude. A draft visible in his mail app needs IMAP credentials, noted as a Track 2 item and not built.
+
+**Not done:** Project and skills not installed (needs Ali's account); folder not yet shared with Ali (address to confirm); no scheduled tasks; evals not run.
+
+**Blocked on:** VIP list; Claude plan and runner choice; Ali connecting his five connectors.
+
+**Next:** on Ali's account, install skills and Project, share the folder, then run T01.
+
 ## 2026-09-21 — Session 3 — Condensed prompt; architecture v4
 
 **Input:** the self‑contained "Claude‑ready" prompt for the same project, asking for Phases 0–1 in a fixed A–F shape and a stop.
