@@ -240,6 +240,18 @@ shaw/
 
 ## G. What is needed from you
 
+### Decisions recorded 2026-09-21 (from the owner's reply)
+| # | Decision | Recorded where |
+|---|---|---|
+| 1, 2 | "yes": hybrid staged, TypeScript. Read as approval of the recommendations; Track 2 code still starts only after Track 1 evals, per the staged plan. | this file, `todo.md` |
+| 5 | Ali's mail is **Hostinger** | `00-config.md` `mail_provider` |
+| 6 | Ali connects **his own** Google Calendar; `aamirsawar123@gmail.com` is not used | `00-config.md` `calendar`, `SETUP.md` |
+| 7 | **Hostinger drafts**: draft kept; "read it to me" reads it back; "send it" sends after the card; otherwise he sends with one tap later | `00-config.md` `draft_flow`, `ea-email` skill |
+| 3, 4 | plan and runner: **still open**; defaults assumed until told otherwise: Team, claude.ai scheduled tasks | `todo.md` |
+
+Caveat on 7: with the Hostinger connector a draft cannot be written into Ali's mail‑app Drafts folder (no API endpoint). "One tap" therefore means tapping `1` on the card in Claude, which sends through the connector. A draft that appears in his mail app itself needs IMAP access, a Track 2 item (`HOSTINGER_IMAP_HOST/USER/PASSWORD` for the mailbox), listed but not built.
+
+
 ### Decisions
 1. **Shape.** (1) custom backend first · (2) Claude‑native only · **(3) hybrid, staged — recommended.**
 2. **Language for code.** **TypeScript — recommended.** Say "Python" now if you want it; after Phase 5 it is expensive.
@@ -253,6 +265,7 @@ shaw/
 Never paste values in chat. `.env.example` will carry every name below.
 - `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` / `GOOGLE_REFRESH_TOKEN` — Google Cloud Console → APIs & Services → Credentials → OAuth client (Web), consent screen internal, offline access; scopes `https://www.googleapis.com/auth/calendar`, `.../drive`, `.../gmail.modify` (only if Gmail hosts Ali's mail). Plus `GOOGLE_PUBSUB_TOPIC` for Gmail push.
 - `HOSTINGER_API_TOKEN` — hPanel → Emails → API; `HOSTINGER_WEBHOOK_SECRET` comes from the API's `regenerate-secret` call, stored not chosen.
+- `HOSTINGER_IMAP_HOST` / `HOSTINGER_IMAP_USER` / `HOSTINGER_IMAP_PASSWORD` — hPanel → Emails → the mailbox → Configuration (IMAP settings, an app password for `ar@alirao.com`); only for placing drafts in his Drafts folder (decision 7).
 - `ZOOM_S2S_ACCOUNT_ID` / `ZOOM_S2S_CLIENT_ID` / `ZOOM_S2S_CLIENT_SECRET` / `ZOOM_WEBHOOK_SECRET_TOKEN` — Zoom App Marketplace → Develop → Server‑to‑Server OAuth; scopes `meeting:read`, `recording:read`, `user:read` (granular equivalents as the console names them at creation); event subscriptions `meeting.ended`, `recording.completed`, `recording.transcript_completed`.
 - `ZOHO_CLIENT_ID` / `ZOHO_CLIENT_SECRET` / `ZOHO_DATA_CENTER` (`com` / `eu` / `sa` / `in`) / `ZOHO_REFRESH_TOKEN` — Zoho API Console → Self Client; scopes `ZohoCRM.modules.ALL`, `ZohoCRM.settings.READ`, `ZohoCRM.notifications.ALL`.
 - `ANTHROPIC_API_KEY` — console.anthropic.com, a key scoped to a separate dev and prod workspace.

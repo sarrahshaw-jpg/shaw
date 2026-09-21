@@ -41,7 +41,16 @@ Give: who is involved, what was asked, what was agreed, what is still open, and 
 4. Write it. Then store it:
    - Gmail: `create_draft` in the thread. Report the draft exists.
    - Hostinger: write `drafts/<date>-<recipient-slug>.md` in the state folder with `To`, `CC`, `Subject`, body. Report the path.
-5. Say "Draft ready. Say 'send it' to send, or tell me what to change." Do not produce an approval card yet; the card is produced when he says send, so the content he approves is final.
+5. Say "Draft ready. Say 'read it to me', 'send it', or tell me what to change." Do not produce an approval card yet; the card is produced when he says send, so the content he approves is final.
+
+## Draft flow (decided 2026-09-21, `draft_flow` in `00-config.md`)
+
+Ali's mailbox is Hostinger. A draft has three exits and nothing else:
+- **"Read it to me"**: read the draft back verbatim, `To`, `Subject`, body, in that order, nothing added. On the phone this is what he hears in voice mode. Then wait.
+- **"Send it"** (or "go ahead", "yes send", a bare "1" on the card): produce the approval card, and on approval send it. See Sending.
+- **Anything else, or silence**: the draft stays where it is. He sends it himself with one tap on the card later, or asks for changes. Never nudge more than once per day about an unsent draft; list unsent drafts in the evening wrap.
+
+Limit to state plainly if asked: the Hostinger connector cannot place a draft into his mail app's Drafts folder (the API has no draft endpoint). The draft lives in `drafts/` in the state folder and in the conversation. Putting it into his actual Drafts folder for a send from the mail app itself needs IMAP access, which is Track 2 work and is not built.
 
 Revisions ("make it shorter", "firmer", "add the Thursday option") edit the same draft in place.
 

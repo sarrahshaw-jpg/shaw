@@ -35,8 +35,8 @@ Settings → Connectors. Connect, in this order:
 | Connector | Why | Notes |
 |---|---|---|
 | **Google Drive** | the state folder; Meet transcripts | required first |
-| **Google Calendar** | schedule | Ali's calendar, not `aamirsawar123@gmail.com`, unless that is his |
-| **Mail** (one of) | inbox, drafts, send | **Gmail** if `ar@alirao.com` is on Google Workspace (best: native drafts and threads). **Hostinger Mail** if it is hosted with Hostinger like `sarah@stravion.ae`. **Microsoft 365** if Outlook. Set `mail_provider` in `00-config.md` to match. |
+| **Google Calendar** | schedule | **Ali's own calendar, connected by Ali** (decided 2026-09-21). Not `aamirsawar123@gmail.com`. |
+| **Hostinger Mail** | inbox, drafts, send | `ar@alirao.com` is on Hostinger (decided 2026-09-21); `mail_provider` is already `hostinger`. Drafts follow the `draft_flow` row in `00-config.md`. |
 | **Zoho CRM** | accounts, deals, notes, tasks | official Zoho CRM connector from the directory; sign in with the org's Zoho account, it routes to the correct data centre automatically |
 | **Zoom for Claude** | meeting search, recaps, transcripts | only sees recordings the host made with cloud recording and recap/transcript enabled |
 | Slack | internal chasing | optional, later |
