@@ -2,6 +2,8 @@
 
 An AI executive assistant for the CEO of Stravion Investments (Dubai) that runs entirely in Claude: a Project with custom instructions, nine skills, three scheduled tasks, official connectors (Google Calendar, Drive, mail, Zoho CRM, Zoom), and a Google Drive folder as its memory, approval queue and audit log. Nothing to host.
 
+**Hand it to Ali:** [HANDOVER.md](HANDOVER.md) — the one page he needs, forward it with the 10 zips from `dist/`.
+
 **Launch:** [LAUNCH.md](LAUNCH.md) — admin setup on a computer (30 min), Ali connects his tools (5 min), then it lives in his phone app. Detailed reference in [SETUP.md](SETUP.md).
 
 | | |
