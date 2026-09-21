@@ -26,7 +26,7 @@ Skills are folders with a `SKILL.md`. Run `scripts/make-skill-zips.sh` to produc
 - **Team/Enterprise**: Admin settings → Skills → upload each zip as an organization skill. Every member gets them.
 - **Pro/Max**: Settings → Capabilities → Skills → upload each zip.
 
-Install all nine: `ea-operating-model`, `ea-email`, `ea-calendar`, `ea-meeting-prep`, `ea-meeting-followup`, `ea-zoho-crm`, `ea-morning-briefing`, `ea-memory`, `ea-commitments`. Keep the existing `stravion-outreach` skill; the EA skills reference its rules and do not replace it.
+Install all ten. `executive-assistant` first: it is the agent's entry point and makes it answer to plain language in any chat, not only inside the Project. Then `ea-operating-model`, `ea-email`, `ea-calendar`, `ea-meeting-prep`, `ea-meeting-followup`, `ea-zoho-crm`, `ea-morning-briefing`, `ea-memory`, `ea-commitments`. Keep the existing `stravion-outreach` skill; the EA skills reference its rules and do not replace it.
 
 ## 3. Connect the tools (each person connects their own)
 

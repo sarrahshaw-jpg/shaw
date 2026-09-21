@@ -9,7 +9,7 @@ An AI executive assistant for the CEO of Stravion Investments (Dubai) that runs 
 | [ARCHITECTURE.md](ARCHITECTURE.md) | v4: three shapes judged, hybrid recommended (Track 1 Claude‑native, built; Track 2 `ea-core`, proposed), stack, integration map, security, phases, what is needed. **Awaiting approval.** |
 | [CLAUDE.md](CLAUDE.md) · [docs/MASTER_BUILD_SPEC.md](docs/MASTER_BUILD_SPEC.md) | working rules and gate state; the spec of record |
 | [claude/PROJECT_INSTRUCTIONS.md](claude/PROJECT_INSTRUCTIONS.md) | the assistant's brain; paste into the Project |
-| [claude/skills/](claude/skills/) | `ea-operating-model`, `ea-email`, `ea-calendar`, `ea-meeting-prep`, `ea-meeting-followup`, `ea-zoho-crm`, `ea-morning-briefing`, `ea-memory`, `ea-commitments` |
+| [claude/skills/](claude/skills/) | `executive-assistant` (the agent itself; triggers on plain language anywhere in Ali's Claude) plus `ea-operating-model`, `ea-email`, `ea-calendar`, `ea-meeting-prep`, `ea-meeting-followup`, `ea-zoho-crm`, `ea-morning-briefing`, `ea-memory`, `ea-commitments` |
 | [claude/scheduled-tasks/](claude/scheduled-tasks/) | 10:00 briefing, hourly sweep, 21:30 wrap |
 | [claude/state-templates/](claude/state-templates/) | the Drive folder `EA — Ali Rao` |
 | [PERMISSIONS.md](PERMISSIONS.md) · [SECURITY.md](SECURITY.md) | risk tiers, approval protocol, controls and limits |

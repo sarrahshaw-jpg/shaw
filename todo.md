@@ -17,7 +17,9 @@
 - [x] Hostinger draft strategy: draft kept, read aloud on request, sent on "send it", otherwise he sends it himself (your decision, 2026-09-21)
 - [!] VIP list for `02-vip-contacts.md` (10 to 20 names, firm, why they matter)
 - [!] Background runner and plan: assuming claude.ai scheduled tasks on Team until you say otherwise
-- [ ] Create Project, paste instructions, upload 9 skill zips
+- [x] Build the agent: `executive-assistant` entry skill added so it triggers anywhere in Ali's Claude; 10 zips built in `dist/`
+- [ ] Upload the 10 skill zips to Ali's account (or the Team org)
+- [ ] Optional: create the Project and paste instructions as his front door
 - [x] Create Drive folder `EA — Ali Rao` from templates (done 2026-09-21, folder id `10QygQqVM3FkQ7M0jhVwO9EHkQevcXI-A` in the admin Drive `titanarshian@gmail.com`; 9 files, subfolders audit/drafts/meetings/briefings)
 - [!] Share that folder with Ali as Editor once his address is confirmed; keep link sharing off
 - [ ] Seed firm register from Sent folders

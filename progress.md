@@ -4,6 +4,24 @@ Append-only. Newest entry at the top. Keeps project state across Claude Code ses
 
 ---
 
+## 2026-09-21 — Session 3, part 3 — made it one agent, always on
+
+**Your direction:** it should be a tool, an agent inside Ali's Claude, active all the time, that he simply gives instructions to.
+
+**Gap found:** the package required Ali to open a Project first. A skill triggers anywhere in his Claude; a Project does not.
+
+**Done**
+- New entry skill `claude/skills/executive-assistant/SKILL.md`: identity, the one rule, risk tiers, firm rules, the draft flow, phone answering rules, and a routing table into the nine `ea-*` skills. Its description carries the natural phrases Ali actually uses, so it activates in any chat without him opening anything.
+- `scripts/make-skill-zips.sh` now builds 10 zips in `dist/`.
+- `LAUNCH.md` rewritten around the three things that make it one always-on agent: skills, the Drive memory folder, the three scheduled tasks. Names the three honest limits: hourly not instant, drafts live in Claude not his mail app, rules enforced by model plus approval rather than code.
+- README, SETUP, todo updated.
+
+**Verified:** the ten zips build cleanly and each contains its `SKILL.md`.
+
+**Not done:** nothing is installed in Ali's account; skills, connectors and the three scheduled tasks must be created there, by him or signed in as him. Not tested against a live account, so no eval status changed.
+
+**Blocked on:** the VIP list, the Claude plan, and Ali doing the 5 minute connector step.
+
 ## 2026-09-21 — Session 3, part 2 — decisions recorded, Drive state folder created
 
 **Your decisions:** Ali connects his own Google Calendar; his mail is Hostinger; drafts stay as drafts, are read aloud when he asks, go out when he says "send it", and otherwise wait for him to send with one tap.

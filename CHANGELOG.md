@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.0 — 2026-09-21
+- Added the `executive-assistant` entry skill so the assistant triggers on plain language anywhere in Ali's Claude, not only inside a Project. Ten skill zips now build.
+- LAUNCH.md rewritten as the one-agent, always-on install path, with the three real limits stated.
+
 ## 0.5.0 — 2026-09-21
 - ARCHITECTURE.md v4 in the A–F shape: three shapes judged on six criteria, unmet requirements named, per‑integration auth and event sources, hosting, credential field names. v3 archived to `docs/ARCHITECTURE-v3-two-track.md`.
 - Added `docs/MASTER_BUILD_SPEC.md` (spec of record) and `CLAUDE.md` (repo working rules, gate state).
