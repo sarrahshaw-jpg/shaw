@@ -4,6 +4,24 @@ Append-only. Newest entry at the top. Keeps project state across Claude Code ses
 
 ---
 
+## 2026-09-21 — Session 3 — Condensed prompt; architecture v4
+
+**Input:** the self‑contained "Claude‑ready" prompt for the same project, asking for Phases 0–1 in a fixed A–F shape and a stop.
+
+**Verified by direct call**
+- Host, Calendar (`aamirsawar123@gmail.com`, Asia/Dubai), Drive (no `EA — Ali Rao` folder), Hostinger (`sarah@stravion.ae`, 300/window), Zapier (LinkedIn only): unchanged since 19 Sep. Zoom, Zoho, Gmail, M365, Slack still not connected in this session.
+- `CLAUDE.md` and `docs/MASTER_BUILD_SPEC.md` did not exist; created.
+
+**Done**
+- ARCHITECTURE.md v4: Options 1/2/3 judged on the six criteria; Option 3 hybrid staged recommended; every unmet spec requirement named with trade‑off; continuous vs Claude‑direct; integration classification with auth per system; hosting requirements; credential field names with console paths; phases with gates; repo structure. v3 moved to `docs/ARCHITECTURE-v3-two-track.md`.
+- tests.json v4 (C11 firm register, C12 memory write), todo, CHANGELOG 0.5.0, README.
+
+**Not done, deliberately:** no application code, no scaffolding, no dependencies.
+
+**Blocked on:** written approval and decisions §G 1–7.
+
+**Next on approval:** Track 1 install with Ali's connectors → T01–T22 → Phase 2 `packages/ea-core` skeleton.
+
 ## 2026-09-19 — Session 2 — Master spec re‑issued; architecture v3
 
 **Input:** the full master build specification, re‑sent, asking for Phase 0–1 and a stop for approval.

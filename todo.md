@@ -2,37 +2,37 @@
 
 `[ ]` open · `[~]` in progress · `[x]` done · `[!]` blocked on you
 
-## Phase 0–1 (this session)
-- [x] Re‑inspect environment; record in ARCHITECTURE.md §A
-- [x] Gap table: master spec vs v2 (ARCHITECTURE.md §B)
-- [x] Reconciled architecture v3: Track 1 Claude‑native + Track 2 `ea-core` (§C)
-- [x] Update todo / progress / tests.json / CHANGELOG
-- [!] **Approve the track choice and TypeScript** (ARCHITECTURE.md §H 1–2). Nothing past Phase 1 starts before this.
+## Phase 0–1 (2026‑09‑21)
+- [x] Re‑inspect environment (unchanged since 19 Sep; recorded in ARCHITECTURE.md §0)
+- [x] Create `docs/MASTER_BUILD_SPEC.md` (spec of record) and `CLAUDE.md` (working rules)
+- [x] ARCHITECTURE.md v4: options judged on six criteria, unmet requirements named, per‑integration auth, hosting, credential fields; v3 moved to `docs/`
+- [x] tests.json v4 (C11, C12 added), progress, changelog, README
+- [!] **Written "approved"** with choices for ARCHITECTURE.md §G 1–7. No code before this.
 
 ## Track 1 — install (no code; needs accounts)
-- [!] Choose plan: Team (recommended) / Enterprise / Ali's own account
-- [!] Tell me where `ar@alirao.com` is hosted → sets `mail_provider`
+- [!] Plan for Ali (Team / Enterprise / own)
+- [!] Host of `ar@alirao.com`
+- [!] Whose calendar is `aamirsawar123@gmail.com`
 - [!] Ali connects Drive, Calendar, mail, Zoho CRM, Zoom for Claude (LAUNCH.md Part 2)
-- [!] VIP list for `02-vip-contacts.md`
-- [!] Background runner: claude.ai scheduled tasks vs Claude Code Routines (§H 7)
+- [!] VIP list; background runner choice; Hostinger draft strategy
 - [ ] Create Project, paste instructions, upload 9 skill zips
-- [ ] Create Drive folder `EA — Ali Rao` from templates (does not exist yet, verified)
-- [ ] Seed firm register from both Sent folders
-- [ ] Create the 3 background runs with push notifications on
-- [ ] Run evals T01→T22 against real accounts; record in tests.json
+- [ ] Create Drive folder `EA — Ali Rao` from templates
+- [ ] Seed firm register from Sent folders
+- [ ] Create the 3 background runs, notifications on
+- [ ] Run T01→T22 on real accounts; record in tests.json
 - [ ] Phase 17 checklist in SECURITY.md
 
-## Track 2 — `ea-core` (only after approval and Track 1 evals)
-- [ ] Phase 2: `packages/ea-core` skeleton, CI, lint, typecheck
-- [ ] Phase 3: Zod config, tz + hours, `.env.example`
-- [ ] Phase 4: token vault, HMAC middleware, RBAC
-- [ ] Phase 5: tool registry + policy guard + MCP server; unit tests
-- [ ] Phase 7/8/9: Hostinger, Zoom, Zoho webhooks (blocked on credentials + hosting)
-- [ ] Phase 12: BullMQ queue, idempotency, DLQ, replay
-- [ ] Phase 18: automated suite green in tests.json
-- [ ] Phase 19: Docker on VM with public HTTPS name
+## Track 2 — `packages/ea-core` (after approval and Track 1 evals)
+- [ ] Phase 2 skeleton, CI, lint, typecheck
+- [ ] Phase 3 config + `.env.example` (C01)
+- [ ] Phase 4 token vault, HMAC, RBAC (C06)
+- [ ] Phase 5 registry, guard, policy pack, MCP server (C02–C05, C11, C12)
+- [ ] Phases 6–9 adapters + webhooks (blocked on credentials and hosting)
+- [ ] Phase 12 queue, dedupe, DLQ, replay (C07, C08)
+- [ ] Phase 14–15 approvals, admin alerts
+- [ ] Phase 18–20 suite green, Docker on VM, monitoring
 
 ## Later
-- [ ] Slack connector and rule M‑4 for internal chasing
-- [ ] WhatsApp when an official connector or WABA credentials exist
-- [ ] Propose automation rules after three identical approvals (ea-memory)
+- [ ] Slack connector and internal chasing rule
+- [ ] WhatsApp via Meta Cloud API when business verification exists
+- [ ] Propose automation rules after three identical approvals

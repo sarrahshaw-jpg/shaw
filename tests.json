@@ -1,7 +1,7 @@
 {
-  "version": 3,
-  "updated": "2026-09-19",
-  "description": "Test registry (spec §21). T01–T22 are behavioural eval scenarios for Track 1 (Claude‑native), run by hand against real or sandbox accounts. C01–C10 are planned automated tests for Track 2 (ea-core); they exist only as placeholders until Track 2 is approved. Never mark pass without a recorded run.",
+  "version": 4,
+  "updated": "2026-09-21",
+  "description": "Test registry (spec §21). T01–T22: behavioural eval scenarios for Track 1, run by hand against real or sandbox accounts (evals/scenarios). C01–C12: automated suites for Track 2 ea-core, registered now, status planned until Track 2 is approved. Never mark pass without last_run and ran_by; blocked needs a note.",
   "statuses": [
     "not_run",
     "pass",
@@ -14,8 +14,8 @@
     "pass": 0,
     "fail": 0,
     "blocked": 3,
-    "planned": 10,
-    "total": 32
+    "planned": 12,
+    "total": 34
   },
   "tests": [
     {
@@ -364,6 +364,28 @@
       "name": "Failed integration surfaces FAILED / PARTIAL SUCCESS, never SUCCESS",
       "scenario": null,
       "kind": "integration",
+      "track": 2,
+      "status": "planned",
+      "last_run": null,
+      "ran_by": null,
+      "notes": "Track 2 not approved"
+    },
+    {
+      "id": "C11",
+      "name": "Policy pack: one contact per firm blocks outbound to a firm in the register",
+      "scenario": null,
+      "kind": "unit",
+      "track": 2,
+      "status": "planned",
+      "last_run": null,
+      "ran_by": null,
+      "notes": "Track 2 not approved"
+    },
+    {
+      "id": "C12",
+      "name": "Memory: durable write without a confirmation record is rejected and logged",
+      "scenario": null,
+      "kind": "unit",
       "track": 2,
       "status": "planned",
       "last_run": null,

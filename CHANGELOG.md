@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.5.0 — 2026-09-21
+- ARCHITECTURE.md v4 in the A–F shape: three shapes judged on six criteria, unmet requirements named, per‑integration auth and event sources, hosting, credential field names. v3 archived to `docs/ARCHITECTURE-v3-two-track.md`.
+- Added `docs/MASTER_BUILD_SPEC.md` (spec of record) and `CLAUDE.md` (repo working rules, gate state).
+- tests.json v4: C11, C12 planned.
+
 ## 0.4.0 — 2026-09-19
 - ARCHITECTURE.md rewritten as v3: master spec reconciled against v2 line by line (§B); two‑track design, Track 1 Claude‑native (built) + Track 2 `ea-core` TypeScript service (proposed) for code‑enforced policy, webhooks and automated tests.
 - Environment re‑inspected: Claude Code Routines verified as a working always‑on mechanism in this account; no Drive state folder yet; Zoom/Zoho still unconnected.
