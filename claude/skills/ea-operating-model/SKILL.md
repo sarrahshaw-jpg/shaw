@@ -9,18 +9,18 @@ Every other `ea-*` skill assumes this one is loaded.
 
 ## State folder
 
-All persistent state lives in one Google Drive folder, named in `state/00-config.md` (default: `EA — Ali Rao`). Files:
+All persistent state lives in one Google Drive folder, named in `00-config.md` (default: `EA — Ali Rao`). Files:
 
 | File | Holds | Who writes |
 |---|---|---|
-| `state/00-config.md` | timezone, operating hours, briefing time, notification thresholds, connector roles | Ali / admin only |
-| `state/01-preferences.md` | scheduling and communication preferences, delegation rules | assistant proposes, Ali approves |
-| `state/02-vip-contacts.md` | VIPs and key clients with why they matter | assistant proposes, Ali approves |
-| `state/03-firm-register.md` | every firm and address ever contacted (one contact per firm rule) | assistant appends after any outbound |
-| `state/04-commitments.md` | promises made by or to Ali, with owner, due date, status | assistant maintains |
-| `state/05-approvals.md` | pending and decided approval cards | assistant appends, Ali decides |
-| `state/06-automation-rules.md` | MEDIUM-tier actions allowed without asking, and any auto-send categories | Ali only |
-| `state/07-processed.md` | IDs of emails, meetings and events already handled by scheduled runs | assistant appends |
+| `00-config.md` | timezone, operating hours, briefing time, notification thresholds, connector roles | Ali / admin only |
+| `01-preferences.md` | scheduling and communication preferences, delegation rules | assistant proposes, Ali approves |
+| `02-vip-contacts.md` | VIPs and key clients with why they matter | assistant proposes, Ali approves |
+| `03-firm-register.md` | every firm and address ever contacted (one contact per firm rule) | assistant appends after any outbound |
+| `04-commitments.md` | promises made by or to Ali, with owner, due date, status | assistant maintains |
+| `05-approvals.md` | pending and decided approval cards | assistant appends, Ali decides |
+| `06-automation-rules.md` | MEDIUM-tier actions allowed without asking, and any auto-send categories | Ali only |
+| `07-processed.md` | IDs of emails, meetings and events already handled by scheduled runs | assistant appends |
 | `audit/YYYY-MM.md` | one line per meaningful action | assistant appends |
 | `drafts/` | draft emails awaiting approval when the mail provider has no drafts endpoint | assistant writes |
 | `meetings/YYYY-MM-DD-<slug>.md` | prep packs and follow-up notes | assistant writes |
@@ -55,7 +55,7 @@ Reversible: <yes / no>
 1 approve · 2 edit · 3 drop      (or "approve A-<seq>")
 ```
 
-`<seq>` continues from the last number in `state/05-approvals.md`. Append the card there with status `PENDING` and the time. When Ali approves, execute, then update the status to `EXECUTED <time>` or `FAILED <reason>`. Cards older than 72 hours are reported as `EXPIRED` in the next briefing and not executed.
+`<seq>` continues from the last number in `05-approvals.md`. Append the card there with status `PENDING` and the time. When Ali approves, execute, then update the status to `EXECUTED <time>` or `FAILED <reason>`. Cards older than 72 hours are reported as `EXPIRED` in the next briefing and not executed.
 
 An approval given in one conversation does not carry to another. A card approved must be executed as written; if anything changed, issue a new card.
 
@@ -85,7 +85,7 @@ Never report `SUCCESS` for a send, create or update you did not see confirmed by
 
 ## Idempotency in scheduled runs
 
-Scheduled runs start from nothing. Before processing any email, meeting, or calendar change, read `state/07-processed.md` and skip any ID listed. After handling an item, append its ID with the date. IDs: email message ID (or provider UID plus folder), Zoom meeting UUID, calendar event ID plus its `updated` timestamp. If `07-processed.md` cannot be read, do not process anything that would create an approval card twice; report `FAILED: state unreadable`.
+Scheduled runs start from nothing. Before processing any email, meeting, or calendar change, read `07-processed.md` and skip any ID listed. After handling an item, append its ID with the date. IDs: email message ID (or provider UID plus folder), Zoom meeting UUID, calendar event ID plus its `updated` timestamp. If `07-processed.md` cannot be read, do not process anything that would create an approval card twice; report `FAILED: state unreadable`.
 
 ## Failure handling
 

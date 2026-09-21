@@ -7,7 +7,7 @@ description: "Tracks commitments made by and to Ali Rao: promises in email, meet
 
 Load `ea-operating-model` first. Adding or updating a line is MEDIUM (allowed by default rule M-1 in the template). Chasing someone by email is HIGH.
 
-## The file: `state/04-commitments.md`
+## The file: `04-commitments.md`
 
 One line per commitment:
 

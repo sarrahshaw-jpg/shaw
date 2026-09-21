@@ -8,7 +8,7 @@ These three prompts are the assistant's background heartbeat. They run as Claude
 | 2 | Working-hours sweep | hourly 11:00 to 21:00 | `0 7-17 * * *` | same |
 | 3 | Evening wrap | 21:30 daily | `30 17 * * *` | same |
 
-If `state/00-config.md` changes the timezone or hours, recompute the cron. Do not hard-code Dubai anywhere except here.
+If `00-config.md` changes the timezone or hours, recompute the cron. Do not hard-code Dubai anywhere except here.
 
 ## Creating them
 
@@ -24,4 +24,4 @@ Each prompt is self-contained because the fired session starts from nothing. It 
 
 ## Idempotency
 
-Every run reads `state/07-processed.md` first and appends to it after handling an item. Two runs overlapping (a slow run plus the next hour's) can therefore still double-process an item; a duplicate approval card is the worst case, and a duplicate send is impossible because unattended runs never send.
+Every run reads `07-processed.md` first and appends to it after handling an item. Two runs overlapping (a slow run plus the next hour's) can therefore still double-process an item; a duplicate approval card is the worst case, and a duplicate send is impossible because unattended runs never send.

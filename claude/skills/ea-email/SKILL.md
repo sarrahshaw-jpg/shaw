@@ -9,7 +9,7 @@ Load `ea-operating-model` first. Sending is always HIGH.
 
 ## Which connector
 
-Read `state/00-config.md` → `mail_provider`. Then:
+Read `00-config.md` → `mail_provider`. Then:
 
 | Provider | Read | Threads | Drafts | Send |
 |---|---|---|---|---|

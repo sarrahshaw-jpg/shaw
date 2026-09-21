@@ -4,6 +4,16 @@ Append-only. Newest entry at the top. Keeps project state across Claude Code ses
 
 ---
 
+## 2026-09-21 — Session 3, part 5 — path bug fixed, task prompts aligned
+
+**Found and fixed a real bug.** The instructions, skills and scheduled-task prompts all referenced `state/00-config.md`, but the Drive folder holds the files at its root with no `state/` subfolder. Every unattended run would have stopped at "FAILED: state folder not found". Corrected across 8 files.
+
+**Also aligned the three scheduled-task prompts** with the decisions since they were written: they now introduce her as Noor, load the `executive-assistant` entry skill first, and the sweep saves drafts to `drafts/` because Hostinger has no draft endpoint (the old text offered a Gmail draft path that does not apply).
+
+**Verified:** no `state/0` reference remains anywhere under `claude/`; zips rebuilt.
+
+**Not done:** still not installed or run anywhere, so no eval status changed.
+
 ## 2026-09-21 — Session 3, part 4 — named her Noor; voice and summoning
 
 **Your direction:** Ali should have voice and chat control, the assistant should have a name, and it should activate on the name or on a message.
