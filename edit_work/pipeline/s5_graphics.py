@@ -160,16 +160,12 @@ for v, T in TARGETS.items():
         f.write(hdr + "\n".join(lines) + "\n")
 
 
-# ---------- shared concept tiles (ref style) ----------
+# ---------- v5 editorial visuals ----------
 if EDIT_STYLE == "ref":
-    import tiles_v3
-    v3dir = os.path.join(WORK, "gfx", "shared_v3")
-    tpaths = tiles_v3.build_all(v3dir)
-    times, kws = tiles_v3.beats(plan)
-    jsave(os.path.join(WORK, "tiles_v3.json"),
-          {"files": tpaths, "times": [round(t, 3) for t in times], "win": 2.1,
-           "keywords": [[k, round(t, 3)] for k, t in kws]})
-    jsave(os.path.join(WORK, "tiles.json"),
-          {"files": tpaths, "times": [round(t, 3) for t in times], "win": 2.1})
-    print("TILES v3:", [round(t, 1) for t in times], "| keywords:", [k for k, _ in kws])
+    import typo_v5
+    typo_v5.build_all(os.path.join(WORK, "gfx", "typo"), plan)
+    jsave(os.path.join(WORK, "bake_manifest_ig.json"),
+          {"baked": [], "all_tiles_covered": True, "tiles_covered": [True] * 8, "all_covered": True})
+    jsave(os.path.join(WORK, "bake_manifest_ld.json"),
+          {"baked": [], "all_tiles_covered": True, "tiles_covered": [False] * 8, "all_covered": False})
 print("GRAPHICS OK for", list(TARGETS.keys()))

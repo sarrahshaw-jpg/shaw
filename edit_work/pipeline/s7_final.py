@@ -47,52 +47,38 @@ for f in seg_files:
 CS = 260
 overlays = []   # (kind, file, start, win, pos_idx)
 if os.environ.get("EDIT_STYLE") == "ref":
-    manifest = jload(os.path.join(WORK, f"bake_manifest_{V}.json"), {})
-    if not manifest.get("all_covered"):
-        tiles = jload(os.path.join(WORK, "tiles.json"))
-        for t_i, (tf, tt) in enumerate(zip(tiles["files"], tiles["times"])):
-            _cov = (manifest.get("tiles_covered") or [])
-            if os.path.exists(tf) and not (_cov[t_i] if t_i < len(_cov) else False):
-                s = min(max(tt, 0.3), plan["new_dur"] - 3.2)
-                overlays.append(("tile", tf, s, tiles.get("win", 3.0), t_i))
-else:
-    emoji_pos = {
-        "ld": [(0.845, 0.20), (0.115, 0.30), (0.840, 0.50), (0.130, 0.14), (0.860, 0.66), (0.120, 0.44)],
-        "ig": [(0.800, 0.22), (0.100, 0.34), (0.790, 0.44), (0.120, 0.17), (0.810, 0.55), (0.110, 0.40)],
-    }[V]
-    for k, kw in enumerate(plan["keywords"][:5]):
-        f = os.path.join(GFX, f"kw{k}.png")
-        if os.path.exists(f):
-            s = min(max(src2dst(kw["src_s"]) + 0.05, 0), plan["new_dur"] - 2.6)
-            overlays.append(("kw", f, s, 2.6, None))
-    for m_i, m in enumerate(plan["emojis"]):
-        f = os.path.join(GFX, f"em{m_i}.png")
-        if os.path.exists(f):
-            s = min(max(m["t"], 0.2), plan["new_dur"] - 2.1)
-            overlays.append(("em", f, s, 2.0, m_i % 6))
+    if V == "ld":
+        typo = jload(os.path.join(WORK, "typo.json"), {"cards": []})
+        for c in typo["cards"]:
+            if os.path.exists(c.get("file", "")):
+                s = min(max(c["t"], 0.3), plan["new_dur"] - c["win"] - 0.4)
+                overlays.append(("card", c["file"], s, c["win"], 0 if c["side"] == "L" else 1))
+
 
 for kind, f, s, win, _ in overlays:
     cmd += ["-loop", "1", "-t", f"{win:.3f}", "-i", f]
 
-# ---------------- video graph ----------------
+# ---------------- video graph: plain concat (frame-accurate sync, no overlaps) ----------------
 parts = []
-cur = "0:v"
-off = 0.0
-durs = [ps["dur"] for ps in segs]
-trs = [ps["tr_after"] for ps in segs]
-for i in range(len(seg_files) - 1):
-    off_i = sum(durs[:i + 1]) - sum(trs[:i + 1])
-    style, tdur = trans[i]
-    nxt = f"x{i}"
-    parts.append(f"[{cur}][{i+1}:v]xfade=transition={style}:duration={tdur:.2f}:offset={off_i:.3f}[{nxt}]")
-    cur = nxt
-
-base = cur
+parts.append("".join(f"[{i}:v]" for i in range(len(seg_files))) +
+             f"concat=n={len(seg_files)}:v=1:a=0[cc]")
+base = "cc"
 TILE_SCALE = {"ld": 0.78, "ig": 1.0}[V]
 for oi, (kind, f, s, win, pos_i) in enumerate(overlays):
     idx = len(seg_files) + oi
     lab_in = f"o{oi}"
-    if kind == "tile":
+    if kind == "card":
+        CW2, CH2 = 457, 604
+        parts.append(f"[{idx}:v]scale={CW2}:{CH2}:flags=bicubic,"
+                     f"format=rgba,fade=t=in:st=0:d=0.35:alpha=1,"
+                     f"fade=t=out:st={win-0.40:.2f}:d=0.40:alpha=1,setpts=PTS-STARTPTS+{s:.3f}/TB[{lab_in}]")
+        fg_w = int(TH * 9 / 16 * 0.98)
+        bar = (TW - fg_w) // 2
+        X = (bar - CW2) // 2 if pos_i == 0 else TW - (bar - CW2) // 2 - CW2
+        Y = (TH - CH2) // 2
+        parts.append(f"[{base}][{lab_in}]overlay={X}:{Y}:"
+                     f"enable='between(t,{s:.3f},{s+win:.3f})':eof_action=pass[b{oi}]")
+    elif kind == "tile":
         parts.append(f"[{idx}:v]zoompan=z='1.07-0.07*on/(25*{win:.2f})':d=1:s=640x640:fps=25,"
                      f"scale={int(640*TILE_SCALE)}:{int(640*TILE_SCALE)}:flags=bicubic,"
                      f"format=rgba,fade=t=in:st=0:d=0.20:alpha=1,"

@@ -26,4 +26,4 @@ Full breakdown above - which one are you taking into this week?
 - LinkedIn: 16:9, 1080p, -14 LUFS audio
 - Instagram: 9:16 Reel, 1080x1920, captions placed for UI-safe zones
 - Covers generated: cover_linkedin.jpg / cover_reel.jpg
-- Removed 14.9s of dead air, fillers and gaps (60.8s final runtime)
+- Removed 14.9s of dead air, fillers and gaps (65.0s final runtime)

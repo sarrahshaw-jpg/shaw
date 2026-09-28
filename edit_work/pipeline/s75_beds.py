@@ -108,23 +108,11 @@ for ps in plan["segments"][:-1]:
     acc += ps["dur"]
     cut_times.append(acc)
     acc -= ps["tr_after"]
-# only section-level transitions get a sound (max 4, very quiet)
-big_cuts = []
-acc = 0.0
-for i, ps in enumerate(plan["segments"][:-1]):
-    acc += ps["dur"]
-    if ps["tr_after"] >= 0.26 and len(big_cuts) < 4:
-        big_cuts.append(acc)
-    acc -= ps["tr_after"]
-for ct in big_cuts:
-    s = whoosh()
-    e = int(ct * SR)
+# v5 sound design: soft ding on editorial reveals only; NO cut sounds
+for tt in jload(os.path.join(WORK, "typo.json"))["cards"]:
+    s = ding(); e = int(tt["t"] * SR)
     if e + len(s) < len(sfx):
-        sfx[e:e + len(s)] += s * 0.085
-for tt in jload(os.path.join(WORK, "tiles_v3.json"))["times"]:
-    s = ding(); e = int(tt * SR)
-    if e + len(s) < len(sfx):
-        sfx[e:e + len(s)] += s * 0.055
+        sfx[e:e + len(s)] += s * 0.05
 sfx = sfx[:int(DUR * SR)]
 sfx /= max(1e-9, np.abs(sfx).max()) / 0.20
 
@@ -143,7 +131,7 @@ cmd = [FFMPEG, "-y", "-loglevel", "error",
        "-i", voice_a, "-i", music_p, "-i", sfx_p,
        "-filter_complex",
        "[0:a]aformat=channel_layouts=stereo[v];"
-       "[1:a]aformat=channel_layouts=stereo,volume=0.32[m];"
+       "[1:a]aformat=channel_layouts=stereo,volume=0.30[m];"
        "[2:a]aformat=channel_layouts=stereo,volume=0.9[s];"
        "[v][m]amix=inputs=2:duration=first:normalize=0[vm];"
        "[vm][s]amix=inputs=2:duration=first:normalize=0[mx];"
@@ -158,4 +146,4 @@ r = run([FFMPEG, "-y", "-loglevel", "error", "-i", final_v, "-i", mixed,
          "-c:v", "copy", "-c:a", "copy", "-movflags", "+faststart", final])
 if r.returncode != 0:
     print(r.stderr[-1500:]); raise SystemExit("remux failed")
-print(f"BEDS OK: music duck-ducked, {len(cut_times)} transition sfx, remuxed -> {final}")
+print(f"BEDS OK: editorial-reveal dings only, music at 0.30, remuxed -> {final}")

@@ -130,8 +130,8 @@ for wi, w in enumerate(words):
             break
 
 # ---------------- 3) timeline mapping ----------------
-TR_TOPIC = 0.28
-TR_PLAIN = 0.16
+TR_TOPIC = 0.0
+TR_PLAIN = 0.0
 
 def is_sentence_end(t):
     last = [w for w in words if w["e"] <= t + 0.9]

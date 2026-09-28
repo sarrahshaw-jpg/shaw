@@ -106,12 +106,12 @@ def stage_a_ig(ps):
     y = f"clip({piecewise(spts_y)},0,ih-{BH})"
     return f"crop={BW}:{BH}:x='{x}':y='{y}',scale={BW * 2}:{BH * 2}:flags=bicubic"
 
-DN = "hqdn3d=1.6:1.2:6:6"   # kill low-light grain BEFORE upscale/sharpen
-# premium look: neutralize warm cast -> shadow-lift S-curve -> gentle tone -> dual-radius crisp
-WB = "colortemperature=temperature=6550:pl=0.62"
-CURVES = "curves=master='0/0.025 0.32/0.37 0.72/0.80 1/0.985'"
-TONE = "eq=contrast=1.02:saturation=1.06:brightness=0.006:gamma=1.09"
-SHARP = "cas=0.30,unsharp=5:5:0.32:5:5:0.0,unsharp=9:9:0.22:9:9:0.0"
+DN = "hqdn3d=1.1:0.9:4:4"   # light temporal denoise - detail preserved
+# v5 conservative grade: neutral WB, micro-contrast, NO lifts/gamma boosts
+WB = "colortemperature=temperature=6600:pl=0.5"
+CURVES = "curves=master='0/0.012 0.5/0.53 1/0.99'"
+TONE = "eq=contrast=1.015:saturation=1.04:brightness=0.004:gamma=1.03"
+SHARP = "cas=0.24,unsharp=5:5:0.28:5:5:0.0,unsharp=7:7:0.14:7:7:0.0"
 LOOK = ",".join([WB, CURVES, TONE])
 fl = os.path.join(WORK, "gfx", V, "face_light.png")
 
