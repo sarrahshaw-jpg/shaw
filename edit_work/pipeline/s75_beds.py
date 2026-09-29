@@ -131,7 +131,7 @@ cmd = [FFMPEG, "-y", "-loglevel", "error",
        "-i", voice_a, "-i", music_p, "-i", sfx_p,
        "-filter_complex",
        "[0:a]aformat=channel_layouts=stereo[v];"
-       "[1:a]aformat=channel_layouts=stereo,volume=0.30[m];"
+       "[1:a]aformat=channel_layouts=stereo,volume=0.27[m];"
        "[2:a]aformat=channel_layouts=stereo,volume=0.9[s];"
        "[v][m]amix=inputs=2:duration=first:normalize=0[vm];"
        "[vm][s]amix=inputs=2:duration=first:normalize=0[mx];"
@@ -146,4 +146,4 @@ r = run([FFMPEG, "-y", "-loglevel", "error", "-i", final_v, "-i", mixed,
          "-c:v", "copy", "-c:a", "copy", "-movflags", "+faststart", final])
 if r.returncode != 0:
     print(r.stderr[-1500:]); raise SystemExit("remux failed")
-print(f"BEDS OK: editorial-reveal dings only, music at 0.30, remuxed -> {final}")
+print(f"BEDS OK: editorial-reveal dings only, music at 0.27, remuxed -> {final}")

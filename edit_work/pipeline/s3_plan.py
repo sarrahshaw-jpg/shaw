@@ -142,6 +142,27 @@ for i, (s, e) in enumerate(segs):
     plan_segs.append({"i": i, "src_s": round(s, 3), "src_e": round(e, 3),
                       "dur": round(e - s, 3), "tr_after": TR_TOPIC if is_sentence_end(e) else TR_PLAIN})
 
+# ---------------- 3b) FRAME LOCK (v6) ----------------
+# v5 cut segments at arbitrary float times: each segment's video came back with
+# ceil(dur*30) frames while its audio was exactly dur seconds. The ceils
+# accumulated -> +0.4s of video stretch by the end => audio drifting AHEAD of
+# the lips. v6 snaps every cut to the frame grid so dur IS a whole number of
+# frames for BOTH streams at every point of the video. Audio is clamped to the
+# exact same length in s7.
+FR = probe.get("fps", 30.0) or 30.0
+_prev_end_f = -1
+for _ps in plan_segs:
+    _n = max(7, round((_ps["src_e"] - _ps["src_s"]) * FR))
+    _sf = max(round(_ps["src_s"] * FR), _prev_end_f + 1)
+    _ps["src_s"] = _sf / FR
+    _ps["src_e"] = (_sf + _n) / FR
+    _ps["dur"] = _n / FR
+    _ps["frames"] = _n
+    _prev_end_f = _sf + _n
+print(f"FRAME LOCK: every cut snapped to the 1/{FR:.0f}s grid "
+      f"({sum(p['frames'] for p in plan_segs)} frames = "
+      f"{sum(p['frames'] for p in plan_segs) / FR:.3f}s, identical for video and audio)")
+
 def src_in_kept(t):
     for ps in plan_segs:
         if ps["src_s"] <= t < ps["src_e"]:
@@ -291,13 +312,13 @@ for sub, nth in (("permission", 1), ("credible", 1)):
 last_i = plan_segs[-1]["i"]
 for ps in plan_segs:
     if ps["i"] == 0:
-        ps["zoom"] = [1.045, 1.095]
+        ps["zoom"] = [1.040, 1.075]
     elif ps["i"] in emphasis_segs:
-        ps["zoom"] = [1.005, 1.06]
+        ps["zoom"] = [1.005, 1.05]
     elif ps["i"] == last_i:
-        ps["zoom"] = [1.055, 1.015]
+        ps["zoom"] = [1.045, 1.015]
     else:
-        ps["zoom"] = [1.035, 1.035]
+        ps["zoom"] = [1.028, 1.028]
 print("ZOOM MOVES: hook +", {i: s for i, s in emphasis_segs.items()}, "+ settle")
 
 # ---------------- 7) caption groups ----------------

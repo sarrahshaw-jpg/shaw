@@ -215,7 +215,7 @@ def phrase_captions(words, emphasis, max_words=3, max_chars=18):
             a["e"] = max(a["s"] + 0.15, b["s"] - 0.02)
     return events
 
-ACCENT = "&HFFD60A&"      # warm gold (BGR)
+ACCENT = "&H80C4E8&"      # antique gold RGB(232,196,128) - BGR order for libass
 WHITE = "&HFFFFFF&"
 
 def write_phrase_ass(events, path, TW, TH, emphasis, mL=40, mR=40, mV=None):

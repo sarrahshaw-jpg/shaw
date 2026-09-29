@@ -45,14 +45,8 @@ for f in seg_files:
     cmd += ["-i", f]
 
 CS = 260
-overlays = []   # (kind, file, start, win, pos_idx)
-if os.environ.get("EDIT_STYLE") == "ref":
-    if V == "ld":
-        typo = jload(os.path.join(WORK, "typo.json"), {"cards": []})
-        for c in typo["cards"]:
-            if os.path.exists(c.get("file", "")):
-                s = min(max(c["t"], 0.3), plan["new_dur"] - c["win"] - 0.4)
-                overlays.append(("card", c["file"], s, c["win"], 0 if c["side"] == "L" else 1))
+overlays = []   # v6: no s7 overlays at all - editorial cards are baked BEHIND the
+                # person in s6b (inside the frame), never in the blur bars
 
 
 for kind, f, s, win, _ in overlays:
@@ -133,7 +127,11 @@ def build_audio_cmd(measured=None, out=None):
         cmd += ["-i", master]
     graph = []
     for i, ps in enumerate(segs):
-        graph.append(f"[{i}:a]atrim=start={ps['src_s']:.3f}:end={ps['src_e']:.3f},asetpts=PTS-STARTPTS[a{i}]")
+        # v6: each segment's audio is clamped to EXACTLY ps['dur'] (= whole frames
+        # at 48k -> whole 1600-sample blocks) so the audio timeline is sample-locked
+        # to the video timeline. atrim end clamps overshoot; apad fills undershoot.
+        graph.append(f"[{i}:a]atrim=start={ps['src_s']:.4f},asetpts=PTS-STARTPTS,"
+                     f"apad,atrim=end={ps['dur']:.6f},asetpts=PTS-STARTPTS[a{i}]")
     # hard concat = zero overlap/echo (crossfades doubled the voice at every join)
     graph.append("".join(f"[a{i}]" for i in range(len(segs))) +
                  f"concat=n={len(segs)}:v=0:a=1[cat]")

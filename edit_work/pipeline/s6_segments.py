@@ -106,14 +106,12 @@ def stage_a_ig(ps):
     y = f"clip({piecewise(spts_y)},0,ih-{BH})"
     return f"crop={BW}:{BH}:x='{x}':y='{y}',scale={BW * 2}:{BH * 2}:flags=bicubic"
 
-DN = "hqdn3d=1.1:0.9:4:4"   # light temporal denoise - detail preserved
-# v5 conservative grade: neutral WB, micro-contrast, NO lifts/gamma boosts
-WB = "colortemperature=temperature=6600:pl=0.5"
-CURVES = "curves=master='0/0.012 0.5/0.53 1/0.99'"
-TONE = "eq=contrast=1.015:saturation=1.04:brightness=0.004:gamma=1.03"
-SHARP = "cas=0.24,unsharp=5:5:0.28:5:5:0.0,unsharp=7:7:0.14:7:7:0.0"
-LOOK = ",".join([WB, CURVES, TONE])
-fl = os.path.join(WORK, "gfx", V, "face_light.png")
+DN = "hqdn3d=1.0:0.0:3.0:3.0"   # v6: temporal-only denoise - zero spatial smoothing, detail untouched
+# v6 NEUTRAL grade: the original footage IS the color reference. No white-balance
+# shift, no curves lift, no brightness/gamma/saturation bumps (that stack was the
+# washed-out grey cast). Color stays exactly as shot.
+LOOK = "null"
+SHARP = "cas=0.35,unsharp=5:5:0.20:5:5:0.0"
 
 for ps in segs:
     outp = os.path.join(SODIR, f"seg_{ps['i']:03d}.mp4")
@@ -137,14 +135,13 @@ for ps in segs:
               f"crop={TW}:{TH},gblur=sigma=26,eq=brightness=-0.05:saturation=0.85[bg];")
         vp = fg + f"[bg][fg]overlay=(W-w)/2:(H-h)/2,{LOOK}[b]"
 
+    NF = ps.get("frames", round(ps["dur"] * FPS))
     r = run([FFMPEG, "-y", "-hide_banner", "-loglevel", "error",
              "-ss", f"{ps['src_s']:.3f}", "-t", f"{ps['dur']:.3f}", "-i", SRC,
-             "-loop", "1", "-t", f"{ps['dur']:.3f}", "-i", fl,
              "-filter_complex",
-             f"{vp};[b][1:v]overlay=0:0:format=auto:eof_action=pass[bt];"
-             f"[bt]{SHARP},format=yuv420p[v]",
-             "-map", "[v]", "-an", "-c:v", "libx264", "-preset", "veryfast",
-             "-crf", "16", "-g", "30", outp])
+             f"{vp};[b]{SHARP},format=yuv420p[v]",
+             "-map", "[v]", "-an", "-frames:v", str(NF), "-c:v", "libx264", "-preset", "veryfast",
+             "-crf", "14", "-g", "30", outp])
     if r.returncode != 0:
         print("SEG FAIL", outp, "\n", r.stderr[-1800:]); sys.exit(1)
     print(f"  seg {ps['i']:03d} {ps['dur']:.2f}s z {ps['zoom'][0]}->{ps['zoom'][1]}")

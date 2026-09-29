@@ -35,8 +35,7 @@ KW_FONT = ImageFont.truetype(os.path.join(FONTS, "Playfair-Italic.ttf"), 104)
 GHOSTS = typo.get("ghosts", [])
 
 fl_path = os.path.join(WORK, "gfx", V, "face_light.png")
-FL = np.array(Image.open(fl_path).convert("RGBA")).astype(np.float32) / 255.0
-FL_A = FL[..., 3:4] * (0.9 * 0.40)
+FL_A = 0.0   # v6: face light REMOVED - original exposure is the reference
 
 seg = mp.solutions.selfie_segmentation.SelfieSegmentation(model_selection=1)
 
@@ -47,8 +46,9 @@ def card_pos(spec, fg_x0, fg_x1):
     if PADMODE:
         x = (fg_x0 - 330) if spec["side"] == "L" else (fg_x1 + 330)
         return x, TH * 0.40
-    x = TW * (0.185 if spec["side"] == "L" else 0.815)
-    return x, TH * 0.40
+    # v6: smaller cards, higher in the background layer, close to her silhouette
+    x = TW * (0.205 if spec["side"] == "L" else 0.795)
+    return x, TH * 0.375
 
 def ghost_pos():
     return TW / 2, TH * 0.165
@@ -68,22 +68,17 @@ def face_center(src_t):
     return path[-1]["cx"], path[-1]["cy"]
 
 _LUT_X = np.array([0, 64, 128, 200, 255], np.float32)
-_LUT_Y = np.array([3, 67, 134, 205, 252], np.float32)
+_LUT_Y = np.array([0, 64, 128, 200, 255], np.float32)   # v6: identity - color untouched
 
 def tone(base):
+    """v6: NO color grade at all (original is the reference; the v5 LUT/gamma/
+    gain stack caused the washed-out white-grey cast). Only crispness: a light
+    two-band unsharp mask, which adds detail without halos or smoothing."""
     x = base.astype(np.float32)
-    x[..., 0] *= 0.988
-    x[..., 2] *= 1.012
-    for c in range(3):
-        x[..., c] = np.interp(x[..., c], _LUT_X, _LUT_Y)
-    x = np.clip(x / 255.0, 0, 1) ** (1 / 1.03)
-    x = x * 1.015 + 0.004
-    gray = (0.2126 * x[..., 0] + 0.7152 * x[..., 1] + 0.0722 * x[..., 2])[..., None]
-    x = np.clip(gray + (x - gray) * 1.04, 0, 1) * 255.0
     b1 = cv2.GaussianBlur(x, (0, 0), 2.0)
-    x += 0.26 * (x - b1)
+    x += 0.24 * (x - b1)
     b2 = cv2.GaussianBlur(x, (0, 0), 5.0)
-    x += 0.12 * (x - b2)
+    x += 0.10 * (x - b2)
     return np.clip(x, 0, 255)
 
 def paste_rgba(base, tile, cx, cy, scale=1.0, alpha_mult=1.0):
@@ -136,7 +131,8 @@ for ps in segs:
     enc = subprocess.Popen(
         [FFMPEG, "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
          "-s", f"{TW}x{TH}", "-r", str(FPS), "-i", "-", "-an",
-         "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", "-g", "30", outp],
+         "-frames:v", str(ps.get("frames", round(dur * FPS))),
+         "-c:v", "libx264", "-preset", "veryfast", "-crf", "14", "-g", "30", outp],
         stdin=subprocess.PIPE)
     z0, z1 = ps["zoom"]
     frame_i = 0
@@ -172,7 +168,6 @@ for ps in segs:
             layer = fg.astype(np.float32)
         else:
             frame = cv2.resize(crop, (TW, TH), interpolation=cv2.INTER_LANCZOS4)
-            frame = frame * (1 - FL_A) + 255.0 * FL[..., :3] * FL_A
             frame = np.clip(frame, 0, 255).astype(np.uint8)
             small = cv2.resize(frame, (480, int(480 * TH / TW)))
             mres = seg.process(small)
@@ -191,16 +186,16 @@ for ps in segs:
                 continue  # landscape: cards go in the bars via s7 overlays
             if c["t"] - 0.15 <= dst_t <= c["t"] + c["win"] + 0.25:
                 a = min(1.0, 3.0 * min(dst_t - (c["t"] - 0.15), (c["t"] + c["win"] + 0.25) - dst_t))
-                drift = 14.0 * min(1.0, max(0.0, dst_t - (c["t"] - 0.15)) / max(c["win"], 0.1))
+                drift = 10.0 * min(1.0, max(0.0, dst_t - (c["t"] - 0.15)) / max(c["win"], 0.1))
                 gx, gy = card_pos(c, fg_x0, fg_x1)
                 paste_rgba(layer, c["img"], gx - (drift if c["side"] == "L" else -drift), gy,
                            scale=c.get("scale", 0.92), alpha_mult=a)
         for g in GHOSTS:
             if g["t"] - 0.15 <= dst_t <= g["t"] + 2.4:
-                a = min(1.0, 3.0 * min(dst_t - (g["t"] - 0.15), (g["t"] + 2.4) - dst_t)) * 0.42
+                a = min(1.0, 3.0 * min(dst_t - (g["t"] - 0.15), (g["t"] + 2.4) - dst_t)) * 0.34
                 tmp = Image.new("RGBA", (1200, 240), (0, 0, 0, 0))
                 td = ImageDraw.Draw(tmp)
-                td.text((600, 120), g["text"], font=KW_FONT, fill=(243, 241, 236, 255), anchor="mm")
+                td.text((600, 120), g["text"], font=KW_FONT, fill=(240, 233, 218, 255), anchor="mm")
                 tmp.putalpha(tmp.getchannel("A").point(lambda v: int(v * a)))
                 bbox = tmp.getbbox()
                 if bbox:
@@ -214,7 +209,6 @@ for ps in segs:
             hh, ww = fg.shape[:2]
             a3 = mfg[..., None]
             out[:, fg_x0:fg_x0 + ww] = out[:, fg_x0:fg_x0 + ww] * (1 - a3) + fg * a3
-            out = out * (1 - FL_A) + 255.0 * FL[..., :3] * FL_A
             out = np.clip(out, 0, 255).astype(np.uint8)
         else:
             out = (layer.astype(np.float32) * (1 - m[..., None]) + frame * m[..., None]).astype(np.uint8)

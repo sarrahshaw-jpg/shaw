@@ -61,15 +61,56 @@ def cover(video, outp, TW, TH, label):
     os.remove(tmp)
     print("COVER:", outp)
 
+def build_ld_from_ig(ig_master):
+    """v6 LinkedIn = the SAME approved vertical composition, pillarboxed on a
+    1920x1080 canvas from its own blurred background - never a side gallery of
+    random images. A very thin hairline frame marks the exact video area that
+    shows on LinkedIn (safe-area guide). A clean copy without the frame is
+    written too, for direct posting."""
+    FG_W = round(1080 * 9 / 16 / 2) * 2 + 0  # 608 -> keep even
+    FG_W = 608
+    x0 = (1920 - FG_W) // 2
+    fc = (
+        f"[0:v]scale={FG_W}:1080:flags=lanczos,setsar=1[fg];"
+        f"[0:v]scale=1920:1080:force_original_aspect_ratio=increase:flags=lanczos,"
+        f"crop=1920:1080,gblur=sigma=28,eq=brightness=-0.06:saturation=0.72[bg];"
+        f"[bg][fg]overlay={x0}:0[base];"
+        f"[base]drawbox=x={x0 - 1}:y=0:w=2:h=1080:color=white@0.45:t=fill,"
+        f"drawbox=x={x0 + FG_W - 1}:y=0:w=2:h=1080:color=white@0.45:t=fill[vf]"
+    )
+    ld_frame = os.path.join(OUT, "LinkedIn_1080p.mp4")
+    ld_clean = os.path.join(OUT, "LinkedIn_1080p_clean.mp4")
+    r = run([FFMPEG, "-y", "-hide_banner", "-loglevel", "error", "-i", ig_master,
+             "-filter_complex", fc, "-map", "[vf]", "-map", "0:a?",
+             "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-profile:v", "high",
+             "-level", "4.1", "-g", "60", "-pix_fmt", "yuv420p",
+             "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709",
+             "-c:a", "copy", "-movflags", "+faststart", ld_frame])
+    if r.returncode != 0:
+        print(r.stderr[-1500:]); raise SystemExit("ld build failed")
+    r = run([FFMPEG, "-y", "-hide_banner", "-loglevel", "error", "-i", ig_master,
+             "-filter_complex",
+             f"[0:v]scale={FG_W}:1080:flags=lanczos,setsar=1[fg];"
+             f"[0:v]scale=1920:1080:force_original_aspect_ratio=increase:flags=lanczos,"
+             f"crop=1920:1080,gblur=sigma=28,eq=brightness=-0.06:saturation=0.72[bg];"
+             f"[bg][fg]overlay={x0}:0[v]",
+             "-map", "[v]", "-map", "0:a?",
+             "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-profile:v", "high",
+             "-level", "4.1", "-g", "60", "-pix_fmt", "yuv420p",
+             "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709",
+             "-c:a", "copy", "-movflags", "+faststart", ld_clean])
+    if r.returncode != 0:
+        print(r.stderr[-1500:]); raise SystemExit("ld clean build failed")
+    print("LD OK: LinkedIn_1080p.mp4 (thin safe-area frame) + LinkedIn_1080p_clean.mp4")
+    return ld_frame
+
 def copy():
-    final_ld = os.path.join(WORK, "out", "ld", "final.mp4")
     final_ig = os.path.join(WORK, "out", "ig", "final.mp4")
-    ld = os.path.join(OUT, "LinkedIn_1080p.mp4")
     ig = os.path.join(OUT, "Instagram_Reel_1080x1920.mp4")
-    if os.path.exists(final_ld):
-        shutil.copy(final_ld, ld)
+    ld = None
     if os.path.exists(final_ig):
         shutil.copy(final_ig, ig)
+        ld = build_ld_from_ig(ig)
     return ld, ig
 
 ld, ig = copy()
@@ -101,10 +142,12 @@ Save this one for later, and tell me which point hit hardest.
 {hook}{chr(10)}{chr(10)}Full breakdown above - which one are you taking into this week?{chr(10)}{chr(10)}{tags_ig}
 
 ## Notes
-- LinkedIn: 16:9, 1080p, -14 LUFS audio
+- LinkedIn: 16:9 1080p - LinkedIn_1080p.mp4 has a very thin safe-area frame marking
+  the exact video area; LinkedIn_1080p_clean.mp4 is frame-free for direct posting
 - Instagram: 9:16 Reel, 1080x1920, captions placed for UI-safe zones
 - Covers generated: cover_linkedin.jpg / cover_reel.jpg
 - Removed {plan['removed_s']}s of dead air, fillers and gaps ({plan['new_dur']:.1f}s final runtime)
+- Audio and video are frame-locked: identical timeline length, zero drift
 """
 with open(os.path.join(OUT, "posting_kit.md"), "w") as f:
     f.write(post)

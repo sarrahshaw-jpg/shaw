@@ -1,29 +1,31 @@
 # Posting Kit
 
 ## Hook (first line on-screen)
-"'Sorry, can I ask something?' Seven words."
+"Sorry, can I ask something?"
 
 ## LinkedIn caption
-'Sorry, can I ask something?' Seven words.
+Sorry, can I ask something?
 
 Here's the full breakdown - the 3 things that actually moved the needle:
-- Something'
 - Question
-- You'Ve
+- Something
+- Harvard
 
 Save this one for later, and tell me which point hit hardest.
 
-#Something #Question #Youve #Harvard #Leadership #Growth
+#Question #Something #Harvard #Apologizing #Leadership #Growth
 
 ## Instagram caption
-'Sorry, can I ask something?' Seven words.
+Sorry, can I ask something?
 
 Full breakdown above - which one are you taking into this week?
 
-#something #question #youve #harvard #powerless #reels #reelsinstagram #explore #viral #contentcreator #personalbranding #creatorlife #entrepreneurlife #growthmindset
+#question #something #harvard #apologizing #sorry #reels #reelsinstagram #explore #viral #contentcreator #personalbranding #creatorlife #entrepreneurlife #growthmindset
 
 ## Notes
-- LinkedIn: 16:9, 1080p, -14 LUFS audio
+- LinkedIn: 16:9 1080p - LinkedIn_1080p.mp4 has a very thin safe-area frame marking
+  the exact video area; LinkedIn_1080p_clean.mp4 is frame-free for direct posting
 - Instagram: 9:16 Reel, 1080x1920, captions placed for UI-safe zones
 - Covers generated: cover_linkedin.jpg / cover_reel.jpg
-- Removed 14.9s of dead air, fillers and gaps (65.0s final runtime)
+- Removed 14.7s of dead air, fillers and gaps (65.3s final runtime)
+- Audio and video are frame-locked: identical timeline length, zero drift
