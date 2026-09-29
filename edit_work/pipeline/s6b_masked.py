@@ -32,6 +32,9 @@ for c in typo["cards"]:
     if os.path.exists(c.get("file", "")):
         CARDS.append({"img": Image.open(c["file"]).convert("RGBA"), **c})
 KW_FONT = ImageFont.truetype(os.path.join(FONTS, "Playfair-Italic.ttf"), 104)
+# v6.1 ghost keywords: bold spaced caps + soft shadow (user: bolder, clean, visible)
+GHOST_FONT = ImageFont.truetype(os.path.join(FONTS, "Montserrat-ExtraBold.ttf"), 112)
+GHOST_SP = 16
 GHOSTS = typo.get("ghosts", [])
 
 fl_path = os.path.join(WORK, "gfx", V, "face_light.png")
@@ -192,11 +195,26 @@ for ps in segs:
                            scale=c.get("scale", 0.92), alpha_mult=a)
         for g in GHOSTS:
             if g["t"] - 0.15 <= dst_t <= g["t"] + 2.4:
-                a = min(1.0, 3.0 * min(dst_t - (g["t"] - 0.15), (g["t"] + 2.4) - dst_t)) * 0.34
-                tmp = Image.new("RGBA", (1200, 240), (0, 0, 0, 0))
+                env = min(1.0, 3.0 * min(dst_t - (g["t"] - 0.15), (g["t"] + 2.4) - dst_t))
+                tmp = Image.new("RGBA", (1600, 300), (0, 0, 0, 0))
                 td = ImageDraw.Draw(tmp)
-                td.text((600, 120), g["text"], font=KW_FONT, fill=(240, 233, 218, 255), anchor="mm")
-                tmp.putalpha(tmp.getchannel("A").point(lambda v: int(v * a)))
+                wtxt = sum(td.textlength(c, font=GHOST_FONT) + GHOST_SP for c in g["text"]) - GHOST_SP
+                x0 = 800 - wtxt / 2
+                # soft dark shadow layer -> clean separation from the busy background
+                shd = Image.new("RGBA", (1600, 300), (0, 0, 0, 0))
+                sd = ImageDraw.Draw(shd)
+                xx = x0 + 5
+                for c in g["text"]:
+                    sd.text((xx, 156), c, font=GHOST_FONT, fill=(10, 10, 12, 210))
+                    xx += sd.textlength(c, font=GHOST_FONT) + GHOST_SP
+                shd = shd.filter(ImageFilter.GaussianBlur(7))
+                xx = x0
+                for c in g["text"]:
+                    td.text((xx, 150), c, font=GHOST_FONT, fill=(242, 236, 222, 255))
+                    xx += td.textlength(c, font=GHOST_FONT) + GHOST_SP
+                tmp = Image.alpha_composite(shd, tmp)
+                peak = 0.70
+                tmp.putalpha(tmp.getchannel("A").point(lambda v: int(v * peak * env)))
                 bbox = tmp.getbbox()
                 if bbox:
                     tmp = tmp.crop(bbox)

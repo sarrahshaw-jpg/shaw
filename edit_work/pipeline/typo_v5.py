@@ -130,7 +130,7 @@ def build_all(outdir, plan):
         {"text": "HARVARD",   "t": g("harvard", 1, 15.0)},
         {"text": "POWERLESS", "t": g("powerless", 1, 33.0)},
         {"text": "CREDIBLE",  "t": g("credible", 1, 46.9)},
-        {"text": "ASK ANYWAY","t": g("ask", 5, 57.5)},
+        {"text": "ASK ANYWAY","t": g("ask", 4, 62.9)},
     ]
     files = []
     for spec in cards_spec:
