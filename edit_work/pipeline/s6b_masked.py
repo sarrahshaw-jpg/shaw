@@ -33,7 +33,8 @@ for c in typo["cards"]:
         CARDS.append({"img": Image.open(c["file"]).convert("RGBA"), **c})
 KW_FONT = ImageFont.truetype(os.path.join(FONTS, "Playfair-Italic.ttf"), 104)
 # v6.1 ghost keywords: bold spaced caps + soft shadow (user: bolder, clean, visible)
-GHOST_FONT = ImageFont.truetype(os.path.join(FONTS, "Montserrat-ExtraBold.ttf"), 112)
+GHOST_FONT_PATH = os.path.join(FONTS, "Montserrat-ExtraBold.ttf")
+GHOST_FONT = ImageFont.truetype(GHOST_FONT_PATH, 112)
 GHOST_SP = 16
 GHOSTS = typo.get("ghosts", [])
 
@@ -196,24 +197,36 @@ for ps in segs:
         for g in GHOSTS:
             if g["t"] - 0.15 <= dst_t <= g["t"] + 2.4:
                 env = min(1.0, 3.0 * min(dst_t - (g["t"] - 0.15), (g["t"] + 2.4) - dst_t))
+                # v6.2: dark vibrant amber + black outline; auto-fit so the word
+                # NEVER touches the frame edges (min 8% margin each side)
+                px = 112
+                _mw = Image.new("RGBA", (1600, 300), (0, 0, 0, 0))
+                _mwd = ImageDraw.Draw(_mw)
+                def _w(p):
+                    f = ImageFont.truetype(GHOST_FONT_PATH, p)
+                    return sum(_mwd.textlength(c, font=f) + GHOST_SP for c in g["text"]) - GHOST_SP
+                while px > 60 and _w(px) > TW * 0.84:
+                    px -= 4
+                gf = ImageFont.truetype(GHOST_FONT_PATH, px)
                 tmp = Image.new("RGBA", (1600, 300), (0, 0, 0, 0))
                 td = ImageDraw.Draw(tmp)
-                wtxt = sum(td.textlength(c, font=GHOST_FONT) + GHOST_SP for c in g["text"]) - GHOST_SP
+                wtxt = sum(td.textlength(c, font=gf) + GHOST_SP for c in g["text"]) - GHOST_SP
                 x0 = 800 - wtxt / 2
-                # soft dark shadow layer -> clean separation from the busy background
                 shd = Image.new("RGBA", (1600, 300), (0, 0, 0, 0))
                 sd = ImageDraw.Draw(shd)
                 xx = x0 + 5
                 for c in g["text"]:
-                    sd.text((xx, 156), c, font=GHOST_FONT, fill=(10, 10, 12, 210))
-                    xx += sd.textlength(c, font=GHOST_FONT) + GHOST_SP
+                    sd.text((xx, 156), c, font=gf, fill=(10, 10, 12, 210))
+                    xx += sd.textlength(c, font=gf) + GHOST_SP
                 shd = shd.filter(ImageFilter.GaussianBlur(7))
                 xx = x0
+                stroke = max(4, px // 18)
                 for c in g["text"]:
-                    td.text((xx, 150), c, font=GHOST_FONT, fill=(242, 236, 222, 255))
-                    xx += td.textlength(c, font=GHOST_FONT) + GHOST_SP
+                    td.text((xx, 150), c, font=gf, fill=(209, 144, 28, 255),
+                            stroke_width=stroke, stroke_fill=(8, 8, 10, 255))
+                    xx += td.textlength(c, font=gf) + GHOST_SP
                 tmp = Image.alpha_composite(shd, tmp)
-                peak = 0.70
+                peak = 0.92
                 tmp.putalpha(tmp.getchannel("A").point(lambda v: int(v * peak * env)))
                 bbox = tmp.getbbox()
                 if bbox:
