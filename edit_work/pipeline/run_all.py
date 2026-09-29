@@ -19,7 +19,7 @@ def stage(n, fn):
     print(f"=== stage {n} done in {time.time()-t0:.1f}s ===")
 
 stage("1", lambda: os.system(f"cd {os.path.dirname(os.path.abspath(__file__))} && python3 s1_probe_audio.py '{SRC}'"))
-stage("2", lambda: os.system(f"cd {os.path.dirname(os.path.abspath(__file__))} && python3 s2_transcribe.py"))
+stage("2", lambda: os.system(f"cd {os.path.dirname(os.path.abspath(__file__))} && python3 s2_transcribe.py && python3 script_correct.py"))
 stage("3", lambda: os.system(f"cd {os.path.dirname(os.path.abspath(__file__))} && python3 s3_plan.py"))
 stage("4", lambda: os.system(f"cd {os.path.dirname(os.path.abspath(__file__))} && python3 s4_faces.py '{SRC}'"))
 stage("5", lambda: os.system(f"cd {os.path.dirname(os.path.abspath(__file__))} && python3 s5_graphics.py"))
